@@ -1,0 +1,192 @@
+// -----------------------------------specializaion_tb----------------------------------------
+public int addSpecialization(String name,int parentSpecializationId,String description,String image);
+
+public int updateSpecialization(int specializaionId, String name,int parentSpecializationId,String description,String image);
+
+public int deleteSpecialization(int specializaionId);
+
+public Collection<specializaion_tb> getAllSpecialization();
+
+// ---------------------------------state_tb---------------------------
+public int addState(String stateName);
+
+public int updateState(int stateId,String stateName);
+
+public int deleteState(int stateId);
+
+public Collection<state_tb> getAllState();
+
+//-----------------------------------city_tb----------------------
+
+public int addCity(String cityName,int stateId);
+
+pulic int updateCity(int cityId,String cityName,int stateId);
+
+public int deleteCity(int cityId);
+
+public Collection<city_tb> getAllCity();
+
+// ---------------------------------area_tb-----------------------
+
+public int addArea(String areaName,int cityId,int pincode,double latitude,double longitude);
+
+public int updateArea(int areaId,String areaName,int cityId,int pincode,double latitude,double longitude);
+
+public int deleteArea(int areaId);
+
+public Collection<area_tb> getAllArea();
+
+// ---------------------------- verify_doctor -----------------------
+
+public Collection<doctor_tb> getAllDoctor();
+
+public int verifyDoctor(int doctorId);
+
+// ---------------------------------------verify_hospital------------------------------
+
+public Collection<hospital_tb> getAllHospital();
+
+public int verifyHospital(int hospitalId);
+
+
+
+// ----------------------- manage doctor schedule ---------------------
+
+public int addDoctorSchedule(int hospitalId,int doctorId,Date date,Time time,String amPm,int numberOfPatient);
+
+public int updateDoctorSchedule(int scheduleId,int hospitalId,int doctorId,Date date,Time time,String amPm,int numberOfPatient0);
+
+public int deleteDoctorSchedule(int scheduleId);
+
+public Collection<doctor_schedule_tb> getAllDoctorSchedule();
+
+public Collection<doctor_schedule_tb> getDoctorSchedule(int doctorId,int hospitalId);
+
+// ------------------------------------manage fees----------------------
+
+public int addFees(int hospitalId,int specializaionId,int fees);
+
+public int updateFees(int feesId,int hospitalId,int specializaionId,int fees);
+
+public Collection<fees_tb> getFeesByHospital(int hospitalId);
+
+public Collection<fees_tb> getFeesBySpeciality(int specializaionId);
+
+public int deleteFees(int feesId);
+
+
+// ----------------------------manage appointment ---------------------
+
+public int bookAppointment(int doctorId,int patientId,int hospitalId,Date date,Time time,String amPm);
+
+public int cancelAppointment(int appointmentId);
+
+public Collection<appointment_tb> getAllDoctorAppointment(int hospitalId,int doctorId);
+
+// ---------------------------- view appointment --------------------
+
+public Collection<appointment_tb> getAllAppointment();
+
+// -----------------------------------------appointment tracking--------------------------
+
+public Collection<appointment_tb> getAllPatientAppointment(int patientId);
+
+// ----------------- view doctor's Patient---------------------
+
+public Collection<patient_tb> getPatientOfDoctor(int doctorId);
+
+// -----------------------view hospital's patient ---------------------------------
+
+public Collection<patient_tb> getPatientOfHospital(int hospitalId);
+
+// --------------------------------- send Attachments--------------------
+
+public int addAttachment(int doctorId,int patientId,String attachment);
+
+public Collection<attachment_tb> viewAttachmentOfDoctor(int doctorId);
+
+public Collection<attachment_tb> viewAttachmentOfPatient(int patientId);
+
+
+//  --------------------------review-----------------------
+
+public int addReview(int patientId,int doctorId,int hospitalId,String review);
+
+public Collection<review_tb> getAllReview();
+
+// ----------------------- search--------------------------------
+
+public Collection<specializaion_tb> getSpecializationByParentId(int parentSpecializationId);
+
+public Collection<doctor_tb> getDoctorOfHospital(int hospitalId);
+
+public Collection<hospital_tb> getHospitalByArea(String areaName);
+
+public Collection<doctor_tb> getDoctorByArea(String areaName);
+
+public Collection<hospital_tb> getHospitalBySpecialization(int specializaionId);
+
+public Collection<hospital_tb> getDoctorBySpecialization(int specializaionId);
+
+public hospital_tb getHospitalByName(String hospitalName);
+
+public doctor_tb getDoctorByName(String doctorName);
+
+public Collection<hospital_tb> getHospitalByFeesAndSpecialization(int specializaionId,int fromFees,int toFees);
+
+public Collection<doctor_tb> getDoctorByAvailability(Date date);
+
+public Collection<hospital_tb> getHospitalByFees(int FromFees,int toFees);
+
+public Collection<hospital_tb> getHospitalByLowToHighFees();
+
+public Collection<hospital_tb> getHospitalByHighToLowFees();
+
+public Collection<doctor_tb> getDoctorByExperience();
+
+public Collection<hospital_tb> getHospitalByCity(String cityName);
+
+public Collection<hospital_tb> getHospitalByState(String stateName);
+
+public Collection<hospital_tb> getHospitalNearMe();
+
+public Collection<hospital_tb> emergency(int specializaionId);
+
+
+// -------------------------registration---------------------------
+
+public int hospitalRegistration(String hospitalName,String address,int areaId,int cityId,int pincode,double latitude,double longitude,Time openingTime,Time closingTime,String logo,String documents,String email,long contact);
+
+public int doctorRegistration(String doctorName,int specializaionId,String experience,String gender,String certificates,String education,String email,long contact);
+
+public int patientRegistration(String patientName,String gender,String address,int age,String username,String password,String email,long contact);
+
+
+public int addUser(String userName,String email,String password,long contact);
+
+public int addUserGroup(int userId,int groupId);
+
+public int authenticateUser(String email,long contact);
+
+
+// ------------------------------------edit profile-------------------------------------------------
+        
+        public int editHospitalProfile(int hospitalId,String hospitalName,String address,int areaId,int cityId,int pincode,Time openingTime,Time closingTime,String logo,String email,long contact,String username,int userId);
+        
+        public int editDoctorProfile(int doctorId,String doctorName,int specializaionId,String experience,String gender,String certificates,String education,String email,long contact,String username,int uerId);
+        
+        public int editPatientProfile(int patientId,String patientName,String gender,String address,int age,String username,String email,long contact,int userId);
+
+// -----------------------------------add schedule--------------------------------------------------------
+
+public long addSchedule(int hospitalId,int doctorId,Date date,Time fromTime,Time toTime,int numberOfPatients);
+
+
+
+ 
+ 
+
+
+
+
+

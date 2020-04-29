@@ -1,0 +1,24 @@
+select * from doctor_schedule_tb where "10:15:00">=toTime || "10:15:00"<=fromTime || "12:00:00" <= fromTime
+
+
+
+resultset==count->insert
+resultset<count->not insert
+
+
+select * from doctor_schedule_tb where "10:15:00">=toTime || "10:15:00"<=fromTime || "12:00:00" <= fromTime || "12:00:00" >= toTime
+
+select * from doctor_schedule_tb where ("11:00:00">=toTime || "11:00:00"<=fromTime) && ("12:45:00" <= fromTime || "12:45:00" >= toTime)
+
+select * from doctor_schedule_tb where doctorId=1 and hospitalId=2 and ("11:00:00">=toTime || "11:00:00"<=fromTime) && ("12:45:00" <= fromTime || "12:45:00" >= toTime)
+
+
+------------------------------------------------------------------------------------------------------
+
+select * from doctor_schedule_tb where doctorId=1 and date="2020-03-02" and ("11:00:00">=toTime || "11:00:00"<=fromTime) && ("12:35:00" <= fromTime || "12:35:00" >= toTime) 
+
+
+and ((d.toTime<=:fromTime || d.fromTime>=:fromTime) && (d.fromTime>= :toTime || d.toTime<= :toTime))
+
+
+SELECT count(d.scheduleId) FROM doctor_schedule_tb d where d.doctorId=1 and d.date="2020-03-02" and (d.toTime<="11:00:00" or d.fromTime>="11:00:00") and (d.fromTime>= "12:35:00" or d.toTime<= "12:35:00")
