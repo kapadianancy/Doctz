@@ -20,12 +20,12 @@ import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
 
 @CustomFormAuthenticationMechanismDefinition(
 loginToContinue = @LoginToContinue(
-        loginPage = "/index.xhtml"
+        loginPage = "/login.xhtml"
 ))
 @DatabaseIdentityStoreDefinition(
         dataSourceLookup = "jdbc/doctz_pool",
-        callerQuery = "select password from user_tb where userName=?",
-        groupsQuery = "select groupName from group_tb g,user_tb u,usergroup_tb ug where ug.userId=u.userId and ug.groupId=g.groupId and u.userName=?",
+        callerQuery = "select password from user_tb where email=?",
+        groupsQuery = "select g.groupName from group_tb g,user_tb u,usergroup_tb ug where ug.userId=u.userId and ug.groupId=g.groupId and u.email=?",
         hashAlgorithm = Pbkdf2PasswordHash.class,
         priority = 30
 )

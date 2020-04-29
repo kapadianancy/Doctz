@@ -9,6 +9,9 @@
                 <library dirs="100">
                     <file>${reference.doctzApp-ejb.dist}</file>
                 </library>
+                <library dirs="200">
+                    <file>${libs.Payara Server (1) Jersey.classpath}</file>
+                </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
