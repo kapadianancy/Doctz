@@ -5780,7 +5780,7 @@ html.menu-opened body {
 	display: block;
 	position: relative;
 	width: 100%;
-	height: auto;
+	height: 200px;
 }
 .blog-image img {
     -webkit-transform: translateZ(0);
