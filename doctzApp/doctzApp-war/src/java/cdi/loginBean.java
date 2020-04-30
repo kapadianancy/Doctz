@@ -37,7 +37,7 @@ public class loginBean {
     SecurityContext sc;
      
     private String username;
-     private String password,message;
+    private String password,message;
     public loginBean() {
     }
 

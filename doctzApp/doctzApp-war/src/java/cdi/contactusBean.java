@@ -82,7 +82,7 @@ public class contactusBean {
   
          // Send message  
          Transport.send(message);  
-         System.out.println("message sent successfully....");  
+         //System.out.println("message sent successfully....");  
   
       }catch (MessagingException mex) {mex.printStackTrace();}
         
