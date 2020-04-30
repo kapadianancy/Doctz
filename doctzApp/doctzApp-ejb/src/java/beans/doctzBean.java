@@ -362,6 +362,12 @@ public class doctzBean implements doctzBeanLocal {
     public Collection<SpecializationTb> getAllSpecialization() {
        return em.createNamedQuery("SpecializationTb.findByIsActive").getResultList();
     }
+    
+    @Override
+    public SpecializationTb getSpecializationById(int specializaionId)
+    {
+        return em.find(SpecializationTb.class,specializaionId);
+    }
 
     @Override
     public Collection<SpecializationTb> getSpecializationByParentId(int parentSpecializationId) {

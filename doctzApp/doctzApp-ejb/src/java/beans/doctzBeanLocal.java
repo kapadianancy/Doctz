@@ -86,6 +86,8 @@ public interface doctzBeanLocal {
 
         public Collection<SpecializationTb> getAllSpecialization();
         
+        public SpecializationTb getSpecializationById(int specializaionId);
+        
         public Collection<SpecializationTb> getSpecializationByParentId(int parentSpecializationId);
         
 // ------------------------------------manage fees----------------------

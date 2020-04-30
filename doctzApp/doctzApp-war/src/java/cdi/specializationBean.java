@@ -32,7 +32,7 @@ public class specializationBean {
     
     private int id;
     private String name;
-    private int pid;
+    
     private String des;
     private String image;
     private int isActive;
@@ -70,13 +70,7 @@ public class specializationBean {
         this.name = name;
     }
 
-    public int getPid() {
-        return pid;
-    }
-
-    public void setPid(int pid) {
-        this.pid = pid;
-    }
+    
 
     public String getDes() {
         return des;

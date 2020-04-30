@@ -5,10 +5,13 @@
  */
 package cdi;
 
+import beans.doctzBeanLocal;
 import client.myclient;
 import entity.DoctorTb;
+import entity.SpecializationTb;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
@@ -23,10 +26,12 @@ import javax.ws.rs.core.Response;
 @RequestScoped
 public class doctorBean {
 
+    
     myclient c;
     Response res;
     
     GenericType<Collection<DoctorTb>> gdoc;
+   
     
     private int id;
     private String name;
@@ -44,6 +49,7 @@ public class doctorBean {
         c=new myclient();
         gdoc=new GenericType<Collection<DoctorTb>>(){};
         alldocs=new ArrayList<DoctorTb>();
+       
     }
 
     public Response getRes() {
@@ -143,13 +149,5 @@ public class doctorBean {
     public void setAlldocs(Collection<DoctorTb> alldocs) {
         this.alldocs = alldocs;
     }
-    
-    public String geta()
-    {
-        return "hello";
-    }
-    
-    
-
     
 }
