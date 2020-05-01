@@ -1,4 +1,7 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Ant-Version: Apache Ant 1.10.4
 Created-By: 1.8.0_05-b13 (Oracle Corporation)
+=======
+>>>>>>> 915544316dc5c268de99af0a8025803a7f764596
 
