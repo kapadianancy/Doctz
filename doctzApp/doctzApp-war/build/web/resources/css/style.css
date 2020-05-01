@@ -2333,7 +2333,7 @@ html.menu-opened body {
 	background: #fff url(../img/search.png) no-repeat 10px center;
 }
 .search-box .search-btn {
-    width: 46px;
+    width: 80px;
     -ms-flex: 0 0 46px;
     flex: 0 0 46px;
     height: 46px;
@@ -6178,6 +6178,7 @@ html.menu-opened body {
 }
 .blog.grid-blog {
 	padding: 20px;
+        height: 475px;
 }
 .grid-blog .entry-meta {
     display: flex;

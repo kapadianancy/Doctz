@@ -19,13 +19,13 @@ import javax.ws.rs.client.WebTarget;
  *        client.close();
  * </pre>
  *
- * @author ADMIN
+ * @author Admin
  */
 public class myclient {
 
     private WebTarget webTarget;
     private Client client;
-    private static final String BASE_URI = "http://localhost:8001/doctzApp-war/webresources";
+    private static final String BASE_URI = "http://localhost:8003/doctzApp-war/webresources";
 
     public myclient() {
         client = javax.ws.rs.client.ClientBuilder.newClient();

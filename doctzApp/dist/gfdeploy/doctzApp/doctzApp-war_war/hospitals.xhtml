@@ -1,10 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
+        
         <ui:composition template="./masterPage.xhtml">
 
             <ui:define name="content">
@@ -26,7 +29,7 @@
                                                 <div class="sort-by">
                                                         <span class="sort-title">Sort by</span>
                                                         <span class="sortby-fliter">
-                                                                <select class="select">
+                                                                <select class="select" style="height:45px;">
                                                                         <option>Select</option>
                                                                         <option class="sorting">Experience</option>
                                                                         <option class="sorting">Availability</option>
@@ -99,6 +102,7 @@
 
 							<!-- Doctor Widget -->
                                                         <ui:repeat value="#{hospitalBean.allhos}" var="h">
+                                                        
 							<div class="card">
 								<div class="card-body">
 									<div class="doctor-widget">
@@ -136,9 +140,18 @@
 									</div>
 								</div>
 							</div>
+                                                            
+                                                          
                                                         </ui:repeat>
 							<!-- /Doctor Widget -->
-                                                        
+                                                        <h:panelGroup rendered="#{empty hospitalBean.allhos}">
+                                                            <div style="position: absolute;
+                                                                        text-align: center;
+                                                                        font-size: 60px;
+                                                                        color: #15558d;
+                                                                        padding: 224px;">No Data Found.</div>
+                                                        </h:panelGroup>
+
                                                         </div>
 					</div>
 

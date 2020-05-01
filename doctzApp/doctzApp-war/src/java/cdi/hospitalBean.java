@@ -10,9 +10,11 @@ import entity.HospitalTb;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
@@ -23,13 +25,20 @@ import javax.ws.rs.core.Response;
 @Named(value = "hospitalBean")
 @RequestScoped
 public class hospitalBean {
+    Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
     
     myclient c;
     Response res;
     
     GenericType<Collection<HospitalTb>> ghos;
     Collection<HospitalTb> allhos;
-
+    
+    
+    GenericType<Collection<HospitalTb>> ghos1;
+    Collection<HospitalTb> allhos1;
+    
+    
+        
     private int id;
     private String name;
     private String address;
@@ -44,18 +53,50 @@ public class hospitalBean {
     private String doc;
     private int uid;
     private int isActive;
-    
+    String area="";
        
+   
+    
     public hospitalBean() {
+        
         c=new myclient();
         ghos=new GenericType<Collection<HospitalTb>>(){};
-        allhos=new ArrayList<HospitalTb>();        
+        allhos=new ArrayList<HospitalTb>(); 
         
     }
+    
+//    @PostConstruct
+//    public void display()
+//    {
+//        
+//        
+//    }
 
     public Collection<HospitalTb> getAllhos() {
-        res=c.getAllHospital(Response.class);
-        allhos=res.readEntity(ghos);
+        if(! params.isEmpty())
+        {
+            area= params.get("area");
+        }
+        else
+        {
+            area="";
+        }
+        
+        System.out.println("Area "+area);
+        if(! area.equals(""))
+        {
+            res=c.getHospitalByArea(Response.class, area);
+            allhos=res.readEntity(ghos);
+            System.out.println(allhos);
+        }
+        else
+        {
+            res=c.getAllHospital(Response.class);
+            allhos=res.readEntity(ghos);
+        }
+//        
+//        res=c.getAllHospital(Response.class);
+//        allhos=res.readEntity(ghos);
         return allhos;
     }
 
