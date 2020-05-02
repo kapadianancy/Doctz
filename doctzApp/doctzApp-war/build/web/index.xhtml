@@ -25,19 +25,19 @@
 						<div class="search-box">
                                                     
 							<h:form>
-								<div class="form-group search-location">
-                                                                    
-                                                                    <h:inputText value="#{searchBean.searchStr}" id="name" class="form-control" a:placeholder="Search Location"/>
+								<div class="form-group search-location">                                                                    
+                                                                    <h:inputText value="#{searchBean.area}" id="area" class="form-control" a:placeholder="Search Location"/>
                                                                     <span class="form-text">Based on your Location</span>
-								</div>
+                                                                </div>
 								<div class="form-group search-info">
-                                                                    <input type="text" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc"></input>
+                                                                    <h:inputText value="#{searchBean.spec}" id="spec" class="form-control" a:placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc"/>
 									<span class="form-text">Ex : Dental or Sugar Check up etc</span>
-								</div>
-                                                            <h:commandButton  label="submit" class="btn btn-primary search-btn" value="Search" type="submit"  action="#{searchBean.searchByArea()}"></h:commandButton>
-<!--								<button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>-->
+                                                                       
                                                                 
-							</h:form>
+                                                                </div>
+                                                            <h:commandButton label="Submit" class="btn btn-primary search-btn" type="submit" value="Serach" action="#{searchBean.search()}"></h:commandButton>
+							
+                                                        </h:form>
 						</div>
 						<!-- /Search -->
 						

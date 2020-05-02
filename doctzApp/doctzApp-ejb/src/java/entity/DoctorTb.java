@@ -40,6 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "DoctorTb.findByGender", query = "SELECT d FROM DoctorTb d WHERE d.gender = :gender"),
     @NamedQuery(name = "DoctorTb.findByEducation", query = "SELECT d FROM DoctorTb d WHERE d.education = :education"),
     @NamedQuery(name = "DoctorTb.getDoctorByExperience", query = "SELECT d FROM DoctorTb d ORDER BY d.experience"),
+    @NamedQuery(name = "DoctorTb.findBySpecializationName", query = "SELECT d FROM DoctorTb d WHERE d.specializationId.name = :specializationName and d.isActive=1"),
     @NamedQuery(name = "DoctorTb.findBySpecialization", query = "SELECT d FROM DoctorTb d WHERE d.specializationId = :specializationId"),
     @NamedQuery(name = "DoctorTb.findByIsActive", query = "SELECT d FROM DoctorTb d WHERE d.isActive = :isActive")})
 public class DoctorTb implements Serializable {

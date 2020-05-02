@@ -11,10 +11,12 @@ import entity.DoctorTb;
 import entity.SpecializationTb;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
@@ -26,13 +28,13 @@ import javax.ws.rs.core.Response;
 @RequestScoped
 public class doctorBean {
 
-    
+    @EJB doctzBeanLocal ejb;
     myclient c;
     Response res;
     
+    Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
     GenericType<Collection<DoctorTb>> gdoc;
    
-    
     private int id;
     private String name;
     private int sid;
@@ -43,15 +45,44 @@ public class doctorBean {
     private String edu;
     private String profile;
     private int isActive;
+    String spec;
+   
     private Collection<DoctorTb> alldocs;
+    private Collection<DoctorTb> searchDocs;
 
     public doctorBean() {
         c=new myclient();
         gdoc=new GenericType<Collection<DoctorTb>>(){};
         alldocs=new ArrayList<DoctorTb>();
+        searchDocs=new ArrayList<DoctorTb>();
        
     }
 
+    public Collection<DoctorTb> getSearchDocs() 
+    {
+        spec=params.get("spec");
+        searchDocs=ejb.getDoctorBySpecializationName(spec);
+        return searchDocs;
+    }
+
+    public void setSearchDocs(Collection<DoctorTb> searchDocs) {
+        this.searchDocs = searchDocs;
+    }
+    
+     public Collection<DoctorTb> getAlldocs() {
+    
+        res=c.getAllDoctor(Response.class);
+        alldocs=res.readEntity(gdoc);
+         
+        return alldocs;
+    
+    }
+
+    public void setAlldocs(Collection<DoctorTb> alldocs) {
+        this.alldocs = alldocs;
+    }
+    
+ 
     public Response getRes() {
         return res;
     }
@@ -140,14 +171,5 @@ public class doctorBean {
         this.isActive = isActive;
     }
 
-    public Collection<DoctorTb> getAlldocs() {
-         res=c.getAllDoctor(Response.class);
-         alldocs=res.readEntity(gdoc);
-         return alldocs;
-    }
-
-    public void setAlldocs(Collection<DoctorTb> alldocs) {
-        this.alldocs = alldocs;
-    }
-    
+   
 }

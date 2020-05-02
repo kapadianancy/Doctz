@@ -5,7 +5,6 @@
  */
 package beans;
 
-import com.sun.java.swing.plaf.windows.WindowsTreeUI;
 import entity.*;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.core.Feature;
 import org.glassfish.soteria.identitystores.hash.Pbkdf2PasswordHashImpl;
 
 /**
@@ -742,6 +740,30 @@ public class doctzBean implements doctzBeanLocal {
     }
 
     @Override
+    public Collection<HospitalTb> getHospitalByAreaAndSpecializationName(String areaName, String specializationName) {
+      
+        Collection<HospitalTb> hosByArea=em.createNamedQuery("HospitalTb.getHospitalByArea").setParameter("areaName",areaName).getResultList(); 
+        Collection<HospitalTb> hospitals=new ArrayList<HospitalTb>();
+        Collection<FeesTb> fees=em.createNamedQuery("FeesTb.findFeesBySpecializationName").setParameter("specializationName",specializationName).getResultList(); 
+        
+        for(FeesTb f:fees)
+        {
+            for(HospitalTb h:hosByArea)
+            {
+                if(f.getHospitalId().getHospitalId()==h.getHospitalId())
+                {
+                    hospitals.add(h);
+                }
+               
+            }
+           
+        }
+        return hospitals;  
+    }
+    
+    
+
+    @Override
     public Collection<DoctorTb> getDoctorByArea(String areaName) {
         Collection<HospitalTb> hos=this.getHospitalByArea(areaName);
         
@@ -781,6 +803,17 @@ public class doctzBean implements doctzBeanLocal {
         SpecializationTb s=em.find(SpecializationTb.class,specializaionId);
         return em.createNamedQuery("DoctorTb.findBySpecialization").setParameter("specializationId",s).getResultList();
     }
+
+    @Override
+    public Collection<DoctorTb> getDoctorBySpecializationName(String specializationName) {
+         return em.createNamedQuery("DoctorTb.findBySpecializationName").setParameter("specializationName",specializationName).getResultList();
+   
+        
+    }
+    
+    
+    
+    
 
     @Override
     public Collection<HospitalTb> getHospitalByName(String hospitalName) {

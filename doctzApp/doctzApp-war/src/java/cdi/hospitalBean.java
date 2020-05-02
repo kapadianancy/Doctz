@@ -5,6 +5,7 @@
  */
 package cdi;
 
+import beans.doctzBeanLocal;
 import client.myclient;
 import entity.HospitalTb;
 import java.sql.Time;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -25,6 +27,8 @@ import javax.ws.rs.core.Response;
 @Named(value = "hospitalBean")
 @RequestScoped
 public class hospitalBean {
+    
+    @EJB doctzBeanLocal ejb;
     Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
     
     myclient c;
@@ -32,10 +36,6 @@ public class hospitalBean {
     
     GenericType<Collection<HospitalTb>> ghos;
     Collection<HospitalTb> allhos;
-    
-    
-    GenericType<Collection<HospitalTb>> ghos1;
-    Collection<HospitalTb> allhos1;
     
     
         
@@ -54,6 +54,7 @@ public class hospitalBean {
     private int uid;
     private int isActive;
     String area="";
+    String spec="";
        
    
     
@@ -64,30 +65,43 @@ public class hospitalBean {
         allhos=new ArrayList<HospitalTb>(); 
         
     }
-    
-//    @PostConstruct
-//    public void display()
-//    {
-//        
-//        
-//    }
+
 
     public Collection<HospitalTb> getAllhos() {
         if(! params.isEmpty())
         {
-            area= params.get("area");
+            if(! params.get("area").equals(""))
+            {
+                if(! params.get("spec").equals("null"))
+                {
+                    spec=params.get("spec");
+                }
+                else
+                {
+                    spec="";
+                }
+                area=params.get("area");
+
+            }
+           
         }
         else
-        {
+        {  
             area="";
+            spec="";
         }
         
-        System.out.println("Area "+area);
-        if(! area.equals(""))
+       System.out.println("area : "+area+"spec : "+spec);
+       
+        if(! area.equals("") && ! spec.equals(""))
+        {
+            allhos=ejb.getHospitalByAreaAndSpecializationName(area, spec);
+        }
+        else if(! area.equals("") && spec.equals(""))
         {
             res=c.getHospitalByArea(Response.class, area);
             allhos=res.readEntity(ghos);
-            System.out.println(allhos);
+          //  System.out.println(allhos);
         }
         else
         {

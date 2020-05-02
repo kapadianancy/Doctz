@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
@@ -139,7 +140,13 @@
 							</div>
                                                         </ui:repeat>
 							<!-- /Doctor Widget -->
-                                                        
+                                                        <h:panelGroup rendered="#{empty doctorBean.alldocs}">
+                                                                <div style="position: absolute;
+                                                                            text-align: center;
+                                                                            font-size: 60px;
+                                                                            color: #15558d;
+                                                                            padding: 224px;">No Data Found.</div>
+                                                        </h:panelGroup>
                                                         </div>
 					</div>
 
@@ -149,6 +156,8 @@
 			<!-- /Page Content -->
     </div>
 </ui:define>
+    
+    
 
  </ui:composition>
 

@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "FeesTb.findByFees", query = "SELECT f FROM FeesTb f WHERE f.fees = :fees"),
     @NamedQuery(name = "FeesTb.findFeesByHospital", query = "SELECT f FROM FeesTb f WHERE f.hospitalId = :hospitalId"),
     @NamedQuery(name = "FeesTb.findHospitalBySpecialization", query = "SELECT f.hospitalId FROM FeesTb f WHERE f.specializationId =:specializationId"),
-    //@NamedQuery(name = "FeesTb.findFeesBySpeciality", query = "SELECT f FROM FeesTb f WHERE f.specializationId.specializationId = :specializationId"),
+    @NamedQuery(name = "FeesTb.findFeesBySpecializationName", query = "SELECT f FROM FeesTb f WHERE f.specializationId.name = :specializationName"),
     @NamedQuery(name = "FeesTb.findHospitalByFeesAndSpecialization", query = "SELECT f.hospitalId FROM FeesTb f WHERE f.specializationId =:specializationId and f.fees >= :fromFee and f.fees <= :toFee"),
     @NamedQuery(name = "FeesTb.getHospitalByLowToHighFees", query = "SELECT f FROM FeesTb f WHERE f.specializationId.name = :spcializationName ORDER BY f.fees"),
     @NamedQuery(name = "FeesTb.getHospitalByHighToLowFees", query = "SELECT f FROM FeesTb f WHERE f.specializationId.name = :spcializationName ORDER BY f.fees desc"),

@@ -382,4 +382,7 @@ public class GenericResource {
         return ejb.getAllHospital();
     }
     
+    
+    
+    
 }

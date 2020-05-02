@@ -6,6 +6,7 @@ package servlets;
  * and open the template in the editor.
  */
 
+import beans.doctzBeanLocal;
 import client.myclient;
 import entity.*;
 import entity.SpecializationTb;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,7 @@ import javax.ws.rs.core.Response;
  */
 public class s2 extends HttpServlet {
 
+    @EJB doctzBeanLocal ejb;
    Response res;
    myclient c1=new myclient();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -44,18 +47,20 @@ public class s2 extends HttpServlet {
 //            res=c1.patientRegistration(Response.class, "Alexa", "Female", "Alexa", "44", "alexa","alexa", "a4@gmail.com","9876543210");
 //            out.println(res);
             
-            Collection<DoctorTb> sp=new ArrayList<DoctorTb>();
-            GenericType<Collection<DoctorTb>> s=new GenericType<Collection<DoctorTb>>(){};
-            res =c1.getAllDoctor(Response.class);
-          //  out.println(res);
-            sp=res.readEntity(s);
+//           // Collection<DoctorTb> sp=new ArrayList<DoctorTb>();
+//            GenericType<Collection<DoctorTb>> s=new GenericType<Collection<DoctorTb>>(){};
+//            res =c1.getAllDoctor(Response.class);
+//          //  out.println(res);
+//            sp=res.readEntity(s);
             
-            for(DoctorTb s1:sp)
+            Collection<HospitalTb> sp=ejb.getHospitalByAreaAndSpecializationName("Ring Road", "Dentist");
+            
+            for(HospitalTb s1:sp)
             {
-                out.println("\n"+s1.getDoctorName()+"<br>");
+                out.println("\n"+s1.getHospitalName()+"<br>");
             }
             
-            out.println("</body>");
+            out.println("hello</body>");
             out.println("</html>");
         }
     }

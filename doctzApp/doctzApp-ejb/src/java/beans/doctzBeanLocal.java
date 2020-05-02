@@ -168,6 +168,8 @@ public interface doctzBeanLocal {
         
         public Collection<DoctorTb> getDoctorByAvailability(Date date);
         
+        public Collection<HospitalTb> getHospitalByAreaAndSpecializationName(String areaName,String specializationName);
+        
 // ------------------------------------edit profile-------------------------------------------------
         
         public int editHospitalProfile(int hospitalId,String hospitalName,String address,int areaId,int cityId,int pincode,Time openingTime,Time closingTime,String logo,String email,long contact,String username,int userId);
@@ -190,4 +192,7 @@ public interface doctzBeanLocal {
         public Collection<DoctorAttachmentTb> viewAttachmentOfDoctor(int doctorId);
 
         public Collection<DoctorAttachmentTb> viewAttachmentOfPatient(int patientId);
+        
+        
+        public Collection<DoctorTb> getDoctorBySpecializationName (String specializationName);
 }

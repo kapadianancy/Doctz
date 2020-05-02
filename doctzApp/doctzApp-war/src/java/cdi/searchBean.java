@@ -20,27 +20,47 @@ import javax.ws.rs.core.Response;
 @RequestScoped
 public class searchBean {
 
-    //myclient c;
-    //Response res;
-   // GenericType<Object>
-            
-    
-    private String searchStr;
+    private String area="";
+    private String spec="";
+
     public searchBean() {
-        //c=new myclient();
     }
 
-    public String getSearchStr() {
-        return searchStr;
+    public String getArea() {
+        return area;
     }
 
-    public void setSearchStr(String searchStr) {
-        this.searchStr = searchStr;
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec;
     }
     
-    public String searchByArea()
+    public String search()
     {
-        return "hospitals.xhtml?faces-redirect=true&area="+this.getSearchStr();
+        
+        if(! this.getArea().equals("") && ! this.getSpec().equals(""))
+        {
+            return "hospitals.xhtml?faces-redirect=true&area="+this.getArea()+"&spec="+this.getSpec();
+        }
+        if(! this.getArea().equals(""))
+        {
+            return "hospitals.xhtml?faces-redirect=true&area="+this.getArea()+"&spec=null";
+        }
+        if(! this.getSpec().equals(""))
+        {
+            return "searchDoctors.xhtml?faces-redirect=true&spec="+this.getSpec();
+        }
+        
+            return "index.xhtml";
+        
     }
     
+   
 }
