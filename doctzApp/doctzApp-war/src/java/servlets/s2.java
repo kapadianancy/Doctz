@@ -7,6 +7,7 @@ package servlets;
  */
 
 import beans.doctzBeanLocal;
+import client.myadmin;
 import client.myclient;
 import entity.*;
 import entity.SpecializationTb;
@@ -28,9 +29,10 @@ import javax.ws.rs.core.Response;
  */
 public class s2 extends HttpServlet {
 
-    @EJB doctzBeanLocal ejb;
+   @EJB doctzBeanLocal ejb;
    Response res;
    myclient c1=new myclient();
+   myadmin a1=new myadmin();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -47,20 +49,31 @@ public class s2 extends HttpServlet {
 //            res=c1.patientRegistration(Response.class, "Alexa", "Female", "Alexa", "44", "alexa","alexa", "a4@gmail.com","9876543210");
 //            out.println(res);
             
-//           // Collection<DoctorTb> sp=new ArrayList<DoctorTb>();
-//            GenericType<Collection<DoctorTb>> s=new GenericType<Collection<DoctorTb>>(){};
-//            res =c1.getAllDoctor(Response.class);
-//          //  out.println(res);
-//            sp=res.readEntity(s);
+//           res=a1.addState(Response.class, "Punjab");
+
+            //res=a1.updateSpecialization(Response.class, "1", "Urologyyyy", "Urology is a part of health care that deals with diseases of the male and female urinary tract.", "resources/img/specialities/specialities-01.png");
+
             
-            Collection<HospitalTb> sp=ejb.getHospitalByAreaAndSpecializationName("Ring Road", "Dentist");
+            Collection<SpecializationTb> sp=new ArrayList<SpecializationTb>();
+            GenericType<Collection<SpecializationTb>> s=new GenericType<Collection<SpecializationTb>>(){};
+            res =a1.getAllSpecialization(Response.class);
+          //  out.println(res);
+            sp=res.readEntity(s);
             
-            for(HospitalTb s1:sp)
+            for(SpecializationTb s1:sp)
             {
-                out.println("\n"+s1.getHospitalName()+"<br>");
+                out.println(s1.getName()+" "+s1.getDescription()+" "+s1.getImage()+"<br>");
             }
             
-            out.println("hello</body>");
+            
+//            Collection<HospitalTb> sp=ejb.getHospitalByAreaAndSpecializationName("Ring Road", "Dentist");
+//            
+//            for(HospitalTb s1:sp)
+//            {
+//                out.println("\n"+s1.getHospitalName()+"<br>");
+//            }
+            
+            out.println("</body>");
             out.println("</html>");
         }
     }
