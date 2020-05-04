@@ -1,0 +1,16 @@
+doctzApp-ejb/build/
+/doctzApp-war/build/
+/doctzApp-ejb/dist/
+/build/
+/dist/
+/doctzApp-war/dist/
+/nbproject/private/
+/doctzApp-ejb/nbproject/private/
+/doctzApp-war/nbproject/private/
+/nbproject/project.properties
+/doctzApp-ejb/nbproject/project.properties
+/doctzApp-war/nbproject/project.properties
+/doctzApp/nbproject/private/
+/doctzApp/build/
+/doctzApp/dist/
+/doctzApp/nbproject/project.properties
