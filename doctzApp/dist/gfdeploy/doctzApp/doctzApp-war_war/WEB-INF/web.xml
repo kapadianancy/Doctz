@@ -17,6 +17,10 @@
         <servlet-name>s2</servlet-name>
         <servlet-class>servlets.s2</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>s1</servlet-name>
+        <servlet-class>servlets.s1</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>test</servlet-name>
         <url-pattern>/test</url-pattern>
@@ -29,6 +33,10 @@
         <servlet-name>s2</servlet-name>
         <url-pattern>/s2</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>s1</servlet-name>
+        <url-pattern>/s1</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -37,7 +45,6 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
-    
     <security-constraint>
         <display-name>Constraint1</display-name>
         <web-resource-collection>
@@ -45,7 +52,6 @@
             <description/>
             <url-pattern>/*</url-pattern>
         </web-resource-collection>
-       
     </security-constraint>
     <security-role>
         <description/>
@@ -63,5 +69,4 @@
         <description/>
         <role-name>patient</role-name>
     </security-role>
-    
 </web-app>
