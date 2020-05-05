@@ -348,7 +348,7 @@ public class GenericResource {
     
 //  public int editPatientProfile(int patientId,String patientName,String gender,String address,int age,String username,String email,long contact,int userId);
     @POST
-    @Path("/editPatientProfile/{patientId}/{patientName}/{gender}/{address}/{age}/{username}{email}/{contact}/{userId}")
+    @Path("/editPatientProfile/{patientId}/{patientName}/{gender}/{address}/{age}/{username}/{email}/{contact}/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
     public int editPatientProfile(@PathParam("patientId") int patientId,@PathParam("patientName")  String patientName,@PathParam("gender") String gender,@PathParam("address") String address,@PathParam("age") int age,@PathParam("username") String username,@PathParam("email") String email,@PathParam("contact") long contact,@PathParam("userId") int userId)
     {

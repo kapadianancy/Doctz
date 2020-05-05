@@ -119,7 +119,9 @@ public class loginBean {
         HttpSession session= request.getSession(true);
         if(session.getAttribute("username")!=null)
         {
-           return "edit_profile.xhtml";
+//            PatientBean p=new PatientBean();
+//            p.display();
+           return "userProfile.xhtml";
         }
         return "faces/login.xhtml";
     }

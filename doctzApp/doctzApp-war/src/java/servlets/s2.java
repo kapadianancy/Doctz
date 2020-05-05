@@ -71,8 +71,9 @@ public class s2 extends HttpServlet {
 //            for(HospitalTb s1:sp)
 //            {
 //                out.println("\n"+s1.getHospitalName()+"<br>");
-//            }
-            
+//          
+            res=c1.editPatientProfile(Response.class, "4", "Nancy", "female", "ganesh--park", "20", "Nancy", "kapadianancy21@gmail.com", "9426555735", "41");
+            out.println("res:" +res);
             out.println("</body>");
             out.println("</html>");
         }

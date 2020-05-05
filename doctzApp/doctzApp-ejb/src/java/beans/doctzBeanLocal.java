@@ -195,4 +195,6 @@ public interface doctzBeanLocal {
         
         
         public Collection<DoctorTb> getDoctorBySpecializationName (String specializationName);
+        
+         public PatientTb getPatientByEmail(String email);
 }

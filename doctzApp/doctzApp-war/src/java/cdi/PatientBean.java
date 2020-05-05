@@ -5,14 +5,21 @@
  */
 package cdi;
 
+import beans.doctzBeanLocal;
 import client.myclient;
 import entity.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
+import jdk.nashorn.internal.objects.annotations.Constructor;
 
 /**
  *
@@ -22,6 +29,7 @@ import javax.ws.rs.core.Response;
 @RequestScoped
 public class PatientBean {
 
+    @EJB doctzBeanLocal ejb;
     Response res;
     myclient c;
     Collection<PatientTb> allpatient;
@@ -31,14 +39,25 @@ public class PatientBean {
     private String patientname,gender,address,username,password,email;
     private long contact;
     private int isActive;
+    
+    private String errorMsg="";
+    
+    private PatientTb currentUser;
+    GenericType<PatientTb> gp;
   
     public PatientBean() {
          
          c=new myclient();
          allpatient=new ArrayList<PatientTb>();
          gpatient=new GenericType<Collection<PatientTb>>(){};
+         currentUser=new PatientTb();
+         gp=new GenericType<PatientTb>(){};
+         
+        
     }
 
+    
+   
     public Collection<PatientTb> getAllpatient() {
         return allpatient;
     }
@@ -137,6 +156,47 @@ public class PatientBean {
     
     
     
+    public PatientTb getCurrentUser() {
+        
+//        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+//               
+//        HttpSession session= request.getSession(true);
+//        String str=session.getAttribute("username").toString();
+//        System.out.println(str);
+//        PatientTb p1=new PatientTb();
+//        
+//        p1=ejb.getPatientByEmail(str);
+//        System.out.println(p1);
+//        this.patientid=p1.getPatientId();
+//        this.patientname=p1.getPatientName();
+//        this.age=p1.getAge();
+//        this.gender=p1.getGender();
+//        this.address=p1.getAddress();
+//        this.userid=p1.getUserId().getUserId();
+//        this.username=p1.getUserId().getUserName();
+//        this.email=p1.getUserId().getEmail();
+//        this.contact=p1.getUserId().getContact(); 
+//        
+//        return p1;
+       
+        return currentUser;
+    }
+
+    public void setCurrentUser(PatientTb currentUser) {
+       
+        this.currentUser = currentUser;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+    
+    
+    
     public String addPatient()
     {
         //Pbkdf2PasswordHashImpl pb=new Pbkdf2PasswordHashImpl();
@@ -153,6 +213,39 @@ public class PatientBean {
         }
         return "signup.xhtml";
         
+    }
+    public String editProfile()
+    {
+        //PatientTb p=this.getCurrentUser();
+        System.out.println(this.getPatientname());
+  //    res=c.editPatientProfile(Response.class, String.valueOf(this.currentUser.getPatientId()), this.patientname, this.gender, this.address, String.valueOf(this.age), this.username,this.email,String.valueOf(this.contact), String.valueOf(this.userid));
+//        System.out.println("res:"+res);
+//        if(res.getStatus() > 0)
+//        {
+//            this.errorMsg="";
+//            
+//            return "userProfile.xhtml";
+//        }
+//        else
+//        {
+//            this.errorMsg="Could not edit your Profile please try again";
+//            return "userProfile.xhtml";
+//        
+//            
+//        }
+//        
+        return "userProfile.xhtml";
+    }
+    
+    public void display()
+    {
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+          
+        HttpSession session= request.getSession(true);
+        String str=session.getAttribute("username").toString();
+        
+        this.setCurrentUser(ejb.getPatientByEmail(str));
+        this.setPatientname(currentUser.getPatientName());
     }
     
     
