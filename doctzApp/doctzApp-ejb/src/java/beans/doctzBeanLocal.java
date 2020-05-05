@@ -204,4 +204,5 @@ public interface doctzBeanLocal {
         
         public long getTotalPatients();
         
+       public PatientTb getPatientByEmail(String email);
 }

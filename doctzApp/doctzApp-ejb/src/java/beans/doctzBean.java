@@ -1162,6 +1162,18 @@ public class doctzBean implements doctzBeanLocal {
         return count;
     }
     
+        @Override
+        public PatientTb getPatientByEmail(String email) {
+        
+        Collection<PatientTb> ps=em.createNamedQuery("PatientTb.findByEmail").setParameter("email",email).getResultList();
+        PatientTb p=new PatientTb();
+        for(PatientTb x:ps)
+        {
+            p=x;
+        }
+        return p;
+    }
+
     
     
     
