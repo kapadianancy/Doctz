@@ -33,11 +33,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "patient_tb")
 //@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PatientTb.findAll", query = "SELECT p FROM PatientTb p"),
+    @NamedQuery(name = "PatientTb.findAll", query = "SELECT p FROM PatientTb p where p.isActive=1"),
     @NamedQuery(name = "PatientTb.findByPatientId", query = "SELECT p FROM PatientTb p WHERE p.patientId = :patientId"),
     @NamedQuery(name = "PatientTb.findByPatientName", query = "SELECT p FROM PatientTb p WHERE p.patientName = :patientName"),
     @NamedQuery(name = "PatientTb.findByGender", query = "SELECT p FROM PatientTb p WHERE p.gender = :gender"),
     @NamedQuery(name = "PatientTb.findByAge", query = "SELECT p FROM PatientTb p WHERE p.age = :age"),
+    @NamedQuery(name = "PatientTb.getTotalPatients", query = "SELECT count(p.patientId) FROM PatientTb p WHERE p.isActive = 1"),
     @NamedQuery(name = "PatientTb.findByIsActive", query = "SELECT p FROM PatientTb p WHERE p.isActive = :isActive")})
 public class PatientTb implements Serializable {
 

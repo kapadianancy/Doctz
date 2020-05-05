@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
+import org.glassfish.soteria.identitystores.hash.Pbkdf2PasswordHashImpl;
 
 /**
  *
@@ -30,6 +31,10 @@ import javax.ws.rs.core.Response;
 public class s2 extends HttpServlet {
 
    @EJB doctzBeanLocal ejb;
+//    Pbkdf2PasswordHashImpl pb=new Pbkdf2PasswordHashImpl();
+//    String n="nidhi";
+//    String pass=pb.generate(n.toCharArray());
+//    
    Response res;
    myclient c1=new myclient();
    myadmin a1=new myadmin();
@@ -44,7 +49,7 @@ public class s2 extends HttpServlet {
             out.println("<title>Servlet s2</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet s2 at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Test</h1>");
             
 //            res=c1.patientRegistration(Response.class, "Alexa", "Female", "Alexa", "44", "alexa","alexa", "a4@gmail.com","9876543210");
 //            out.println(res);
@@ -53,18 +58,25 @@ public class s2 extends HttpServlet {
 
             //res=a1.updateSpecialization(Response.class, "1", "Urologyyyy", "Urology is a part of health care that deals with diseases of the male and female urinary tract.", "resources/img/specialities/specialities-01.png");
 
-            
-            Collection<SpecializationTb> sp=new ArrayList<SpecializationTb>();
-            GenericType<Collection<SpecializationTb>> s=new GenericType<Collection<SpecializationTb>>(){};
-            res =a1.getAllSpecialization(Response.class);
-          //  out.println(res);
-            sp=res.readEntity(s);
-            
-            for(SpecializationTb s1:sp)
-            {
-                out.println(s1.getName()+" "+s1.getDescription()+" "+s1.getImage()+"<br>");
-            }
-            
+//            
+//            Collection<SpecializationTb> sp=new ArrayList<SpecializationTb>();
+//            GenericType<Collection<SpecializationTb>> s=new GenericType<Collection<SpecializationTb>>(){};
+//            res =a1.getAllSpecialization(Response.class);
+//          //  out.println(res);
+//          
+//            sp=res.readEntity(s);
+//            
+//            for(SpecializationTb s1:spe)
+//            {
+//                out.println(s1.getName()+" "+s1.getDescription()+" "+s1.getImage()+"<br>");
+//            }
+
+                GenericType<SpecializationTb> specs=new GenericType<SpecializationTb>(){};
+                res=a1.getSpecializationById(Response.class, "2");
+                SpecializationTb spe=res.readEntity(specs);
+                out.println(spe.getName()+" "+spe.getDescription()+" "+spe.getImage()+"<br>");
+                
+//            
             
 //            Collection<HospitalTb> sp=ejb.getHospitalByAreaAndSpecializationName("Ring Road", "Dentist");
 //            

@@ -79,7 +79,7 @@ public class loginBean {
                     session.setAttribute("password",getPassword());
                     //System.out.println(sc.isCallerInRole("admin"));
                     if(sc.isCallerInRole("admin")){
-                        return "temp.xhtml";
+                        return "admin/dashboard.xhtml?faces-redirect=true";
                     }
                     else if(sc.isCallerInRole("patient")){
                         return "index.xhtml";

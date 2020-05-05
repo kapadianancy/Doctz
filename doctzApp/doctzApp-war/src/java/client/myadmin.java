@@ -60,6 +60,12 @@ public class myadmin {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public <T> T getSpecializationById(Class<T> responseType, String specializaionId) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("getSpecializationById/{0}", new Object[]{specializaionId}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public <T> T updateSpecialization(Class<T> responseType, String specializaionId, String name, String description, String image) throws ClientErrorException {
         return webTarget.path(java.text.MessageFormat.format("updateSpecialization/{0}/{1}/{2}/{3}", new Object[]{specializaionId, name, description, image})).request().post(null, responseType);
     }

@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "AppointmentTb.findPatientOfDoctor", query = "SELECT distinct(a.patientId) FROM AppointmentTb a WHERE a.doctorId = :doctorId"),
     @NamedQuery(name = "AppointmentTb.findPatientOfHospital", query = "SELECT distinct(a.patientId) FROM AppointmentTb a WHERE a.hospitalId = :hospitalId"),
     @NamedQuery(name = "AppointmentTb.findByPatientId", query = "SELECT a FROM AppointmentTb a WHERE a.patientId = :patientId and a.isActive=1"),
+    @NamedQuery(name = "AppointmentTb.getTotalAppointments", query = "SELECT count(a.appointmentId) FROM AppointmentTb a"),
     @NamedQuery(name = "AppointmentTb.findByIsActive", query = "SELECT a FROM AppointmentTb a WHERE a.isActive = :isActive")})
 public class AppointmentTb implements Serializable {
 

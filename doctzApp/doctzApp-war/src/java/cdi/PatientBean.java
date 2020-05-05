@@ -5,10 +5,12 @@
  */
 package cdi;
 
+import beans.doctzBeanLocal;
 import client.myclient;
 import entity.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.core.GenericType;
@@ -22,6 +24,7 @@ import javax.ws.rs.core.Response;
 @RequestScoped
 public class PatientBean {
 
+    @EJB doctzBeanLocal ejb;
     Response res;
     myclient c;
     Collection<PatientTb> allpatient;
@@ -40,7 +43,8 @@ public class PatientBean {
     }
 
     public Collection<PatientTb> getAllpatient() {
-        return allpatient;
+          allpatient=ejb.getAllPatient();
+          return allpatient;
     }
 
     public void setAllpatient(Collection<PatientTb> allpatient) {

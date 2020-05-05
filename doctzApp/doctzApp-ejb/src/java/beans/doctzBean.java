@@ -460,6 +460,13 @@ public class doctzBean implements doctzBeanLocal {
     }
 
     @Override
+    public Collection<PatientTb> getAllPatient() {
+        return em.createNamedQuery("PatientTb.findAll").getResultList();
+    }
+
+    
+    
+    @Override
     public Collection<HospitalTb> getAllHospital() {
          return em.createNamedQuery("HospitalTb.findByIsActive").setParameter("isActive",1).getResultList();
    }
@@ -1108,6 +1115,53 @@ public class doctzBean implements doctzBeanLocal {
        return em.createNamedQuery("DoctorAttachmentTb.findByPatientId").setParameter("patientId", patientId).getResultList();
     }
 
+    
+//----------------------Get Total Number of entity----------------------------------------------------------------------
+
+    @Override
+    public long getTotalDoctors() {
+        List<Long> temp=em.createNamedQuery("DoctorTb.getTotalDoctors").getResultList();
+        long count=0;
+        for(long i:temp)
+        {
+            count=i;
+        }
+        return count;
+    }
+
+    @Override
+    public long getTotalHospitals() {
+        List<Long> temp=em.createNamedQuery("HospitalTb.getTotalHospitals").getResultList();
+        long count=0;
+        for(long i:temp)
+        {
+            count=i;
+        }
+        return count;
+    }
+
+    @Override
+    public long getTotalAppointments() {
+         List<Long> temp=em.createNamedQuery("AppointmentTb.getTotalAppointments").getResultList();
+        long count=0;
+        for(long i:temp)
+        {
+            count=i;
+        }
+        return count;
+    }
+
+    @Override
+    public long getTotalPatients() {
+         List<Long> temp=em.createNamedQuery("PatientTb.getTotalPatients").getResultList();
+        long count=0;
+        for(long i:temp)
+        {
+            count=i;
+        }
+        return count;
+    }
+    
     
     
     
