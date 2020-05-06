@@ -63,6 +63,7 @@ public interface doctzBeanLocal {
         public int patientRegistration(String patientName,String gender,String address,int age,String username,String password,String email,long contact);
 
         
+        public Collection<PatientTb> getAllPatient();
         
 // ---------------------------------------verify_hospital------------------------------
 
@@ -185,16 +186,23 @@ public interface doctzBeanLocal {
         
 //---------------------------------Doctor Attachment --------------------------------------------------------------------------------
 
-
-
         public int addAttachment(int doctorId,int patientId,String attachment);
 
         public Collection<DoctorAttachmentTb> viewAttachmentOfDoctor(int doctorId);
 
         public Collection<DoctorAttachmentTb> viewAttachmentOfPatient(int patientId);
         
-        
         public Collection<DoctorTb> getDoctorBySpecializationName (String specializationName);
         
-         public PatientTb getPatientByEmail(String email);
+ //----------------------Get Total Number of entity----------------------------------------------------------------------
+        
+        public long getTotalDoctors();
+        
+        public long getTotalHospitals();
+        
+        public long getTotalAppointments();
+        
+        public long getTotalPatients();
+        
+       public PatientTb getPatientByEmail(String email);
 }

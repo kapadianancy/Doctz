@@ -10,7 +10,6 @@ import client.myclient;
 import entity.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
-import jdk.nashorn.internal.objects.annotations.Constructor;
 
 /**
  *
@@ -39,12 +37,14 @@ public class PatientBean {
     private String patientname,gender,address,username,password,email;
     private long contact;
     private int isActive;
-    
-    private String errorMsg="";
+  
+     private String errorMsg="";
     
     private PatientTb currentUser;
     GenericType<PatientTb> gp;
   
+    
+    
     public PatientBean() {
          
          c=new myclient();
@@ -52,14 +52,11 @@ public class PatientBean {
          gpatient=new GenericType<Collection<PatientTb>>(){};
          currentUser=new PatientTb();
          gp=new GenericType<PatientTb>(){};
-         
-        
     }
 
-    
-   
     public Collection<PatientTb> getAllpatient() {
-        return allpatient;
+          allpatient=ejb.getAllPatient();
+          return allpatient;
     }
 
     public void setAllpatient(Collection<PatientTb> allpatient) {
@@ -155,8 +152,7 @@ public class PatientBean {
     }
     
     
-    
-    public PatientTb getCurrentUser() {
+      public PatientTb getCurrentUser() {
         
 //        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 //               
@@ -197,6 +193,8 @@ public class PatientBean {
     
     
     
+
+    
     public String addPatient()
     {
         //Pbkdf2PasswordHashImpl pb=new Pbkdf2PasswordHashImpl();
@@ -214,7 +212,9 @@ public class PatientBean {
         return "signup.xhtml";
         
     }
-    public String editProfile()
+    
+    
+        public String editProfile()
     {
         //PatientTb p=this.getCurrentUser();
         System.out.println(this.getPatientname());
@@ -247,6 +247,5 @@ public class PatientBean {
         this.setCurrentUser(ejb.getPatientByEmail(str));
         this.setPatientname(currentUser.getPatientName());
     }
-    
     
 }

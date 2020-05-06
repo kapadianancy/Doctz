@@ -219,6 +219,15 @@ public class adminRest {
         return ejb.getAllSpecialization();
     }
     
+    //public SpecializationTb getSpecializationById(int specializaionId);
+    @GET
+    @Path("/getSpecializationById/{specializaionId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public SpecializationTb getSpecializationById(@PathParam("specializaionId") int specializaionId)
+    {
+        return ejb.getSpecializationById(specializaionId);
+    }
+    
     //public Collection<AppointmentTb> getAllAppointment();
     @GET
     @Path("/getAllAppointment")

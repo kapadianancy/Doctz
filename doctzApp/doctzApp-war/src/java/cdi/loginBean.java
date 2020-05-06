@@ -79,7 +79,7 @@ public class loginBean {
                     session.setAttribute("password",getPassword());
                     //System.out.println(sc.isCallerInRole("admin"));
                     if(sc.isCallerInRole("admin")){
-                        return "temp.xhtml";
+                        return "admin/dashboard.xhtml?faces-redirect=true";
                     }
                     else if(sc.isCallerInRole("patient")){
                         return "index.xhtml";
@@ -102,7 +102,7 @@ public class loginBean {
         
     }
     
-    public String getLogin()
+     public String getLogin()
     {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession session= request.getSession(true);

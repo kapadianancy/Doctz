@@ -14,7 +14,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-//import org.glassfish.soteria.identitystores.hash.Pbkdf2PasswordHashImpl;
+import org.glassfish.soteria.identitystores.hash.Pbkdf2PasswordHashImpl;
 
 /**
  *
@@ -25,7 +25,7 @@ public class doctzBean implements doctzBeanLocal {
 
     @PersistenceContext(unitName = "doctzpu")
     EntityManager em;
-    //Pbkdf2PasswordHashImpl pb=new Pbkdf2PasswordHashImpl();
+    Pbkdf2PasswordHashImpl pb=new Pbkdf2PasswordHashImpl();
     //String pass=pb.generate(this.password.toCharArray());
     
     @Override
@@ -425,8 +425,8 @@ public class doctzBean implements doctzBeanLocal {
     @Override
     public int patientRegistration(String patientName, String gender, String address, int age, String username, String password, String email, long contact) {
         int status=0;
-        //String pass=pb.generate(password.toCharArray());
-        String pass=password;
+        String pass=pb.generate(password.toCharArray());
+        
         int userid=this.addUser(username, pass, email, contact);
         
         if(userid>0)
@@ -459,6 +459,13 @@ public class doctzBean implements doctzBeanLocal {
         return status;
     }
 
+    @Override
+    public Collection<PatientTb> getAllPatient() {
+        return em.createNamedQuery("PatientTb.findAll").getResultList();
+    }
+
+    
+    
     @Override
     public Collection<HospitalTb> getAllHospital() {
          return em.createNamedQuery("HospitalTb.findByIsActive").setParameter("isActive",1).getResultList();
@@ -1108,8 +1115,55 @@ public class doctzBean implements doctzBeanLocal {
        return em.createNamedQuery("DoctorAttachmentTb.findByPatientId").setParameter("patientId", patientId).getResultList();
     }
 
+    
+//----------------------Get Total Number of entity----------------------------------------------------------------------
+
     @Override
-    public PatientTb getPatientByEmail(String email) {
+    public long getTotalDoctors() {
+        List<Long> temp=em.createNamedQuery("DoctorTb.getTotalDoctors").getResultList();
+        long count=0;
+        for(long i:temp)
+        {
+            count=i;
+        }
+        return count;
+    }
+
+    @Override
+    public long getTotalHospitals() {
+        List<Long> temp=em.createNamedQuery("HospitalTb.getTotalHospitals").getResultList();
+        long count=0;
+        for(long i:temp)
+        {
+            count=i;
+        }
+        return count;
+    }
+
+    @Override
+    public long getTotalAppointments() {
+         List<Long> temp=em.createNamedQuery("AppointmentTb.getTotalAppointments").getResultList();
+        long count=0;
+        for(long i:temp)
+        {
+            count=i;
+        }
+        return count;
+    }
+
+    @Override
+    public long getTotalPatients() {
+         List<Long> temp=em.createNamedQuery("PatientTb.getTotalPatients").getResultList();
+        long count=0;
+        for(long i:temp)
+        {
+            count=i;
+        }
+        return count;
+    }
+    
+        @Override
+        public PatientTb getPatientByEmail(String email) {
         
         Collection<PatientTb> ps=em.createNamedQuery("PatientTb.findByEmail").setParameter("email",email).getResultList();
         PatientTb p=new PatientTb();
@@ -1120,6 +1174,7 @@ public class doctzBean implements doctzBeanLocal {
         return p;
     }
 
+    
     
     
 }
