@@ -35,13 +35,15 @@ public class specializationBean {
     myadmin a;
     Collection<SpecializationTb> allspec;
     GenericType<Collection<SpecializationTb>> gspec;
+    GenericType<SpecializationTb> gs;
     
-    private int id;
+    private int id,selectedId;
     private String name;
     private String des;
     private String image;
     private int isActive;
     private Part uploadedFile;
+    private SpecializationTb s;
     private String folder = "H:\\Doctz\\doctzApp\\doctzApp-war\\web\\resources\\img\\specialities";
     
      public specializationBean() {
@@ -58,9 +60,21 @@ public class specializationBean {
         return allspec;
     }
 
+    
+    
     public void setAllspec(Collection<SpecializationTb> allspec) {
         this.allspec = allspec;
     }
+
+    public SpecializationTb getS() {
+        return s;
+    }
+
+    public void setS(SpecializationTb s) {
+        this.s = s;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -70,6 +84,16 @@ public class specializationBean {
         this.id = id;
     }
 
+    public int getSelectedId() {
+        return selectedId;
+    }
+
+    public void setSelectedId(int selectedId) {
+        this.selectedId = selectedId;
+    }
+
+    
+    
     public String getName() {
         return name;
     }
@@ -129,13 +153,32 @@ public class specializationBean {
         this.uploadImage();
        // System.out.println(this.name+" "+this.uploadedFile.getSubmittedFileName());
         res=a.addSpecialization(Response.class, this.name, this.des,this.uploadedFile.getSubmittedFileName());
-        this.name="";
-        this.des="";
-        return "addSpecialities.xhtml";
+
+        return "specialities.xhtml?faces-redirect=true";
     }
             
-    /**
-     * Creates a new instance of specializationBean
-     */
+    public String Delete()
+    {
+        res=a.deleteSpecialization(Response.class, String.valueOf(this.selectedId));
+        return "specialities.xhtml?faces-redirect=true";
+    }
    
+    public String edit(int id)
+    {
+//        System.out.println(id);
+//        SpecializationTb s1=new SpecializationTb();
+//       res=a.getSpecializationById(Response.class, String.valueOf(id));
+//       s1=res.readEntity(gs);
+//        System.out.println(s1.getName());
+//       this.name=s.getName();
+//       this.des=s.getDescription();
+//       this.image=s.getImage();
+       return "editSpecialities.xhtml";
+    }
+    
+    public String update()
+    {
+        res=a.updateSpecialization(Response.class, String.valueOf(this.id), this.name, this.des, this.uploadedFile.getSubmittedFileName());
+        return "specialities.xhtml?faces-redirect=true";
+    }
 }

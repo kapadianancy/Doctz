@@ -3,14 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://java.sun.com/jsf/passthrough">
+      xmlns:a="http://java.sun.com/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
         <ui:composition template="./masterPage.xhtml">
 
             <ui:define name="content">
-               
+                <h:form>
             <div class="page-wrapper">
                 <div class="content container-fluid">
 				
@@ -47,24 +48,28 @@
                                                                     <ui:repeat value="#{specializationBean.allspec}" var="s">
                                                                         <tr>
                                                                             <td>
-                                                                                       <h2 class="table-avatar">
-                                                                                               <a href="profile.html" class="avatar avatar-sm mr-2">
-                                                                                                   <img class="avatar-img" src="/doctzApp-war/#{s.image}" alt="Speciality"/>
-                                                                                               </a>
-                                                                                           <a href="profile.html">#{s.name}</a>
-                                                                                       </h2>
+                                                                                <h2 class="table-avatar">
+                                                                                        <a href="profile.html" class="avatar avatar-sm mr-2">
+                                                                                            <img class="avatar-img" src="/doctzApp-war/#{s.image}" alt="Speciality"/>
+                                                                                        </a>
+                                                                                    <a href="profile.html">#{s.name}</a>
+                                                                                </h2>
                                                                             </td>
                                                                             
                                                                             <td>#{s.description}</td>
 
                                                                             <td class="text-right">
                                                                                     <div class="actions">
-                                                                                            <a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
-                                                                                                    <i class="fe fe-pencil"></i> Edit
-                                                                                            </a>
-                                                                                            <a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light">
-                                                                                                    <i class="fe fe-trash"></i> Delete
-                                                                                            </a>
+<!--                                                                                        <a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details1">
+                                                                                              <i class="fe fe-pencil"></i> Edit
+                                                                                        </a>-->
+
+                                                            <h:commandButton class="btn btn-sm bg-success-light" value="Edit" action="#{specializationBean.edit(s.specializationId)}">    
+                                                            </h:commandButton>
+
+                                                                                         <a data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light">
+                                                                                              <i class="fe fe-trash">Delete</i>
+                                                                                         </a>   
                                                                                     </div>
                                                                             </td>
                                                                         </tr>
@@ -85,10 +90,11 @@
 					</div>
 				</div>			
 			</div>
+                </h:form>
 			<!-- /Page Wrapper -->
 			
 			<!-- Edit Details Modal -->
-			<div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog">
+			<div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog" >
 				<div class="modal-dialog modal-dialog-centered" role="document" >
 					<div class="modal-content">
 						<div class="modal-header">
@@ -99,25 +105,26 @@
 						</div>
 						<div class="modal-body">
                                                     <h:form enctype="multipart/form-data">
+                                                        <h:inputHidden value="#{s.specializationId}"></h:inputHidden>
 								<div class="row form-row">
 									<div class="col-12 col-sm-12">
                                                                             <div class="form-group">
                                                                                      <label>Name</label>
-                                                                                     <h:inputText class="form-control"></h:inputText>
+                                                                                     <h:inputText class="form-control" value="#{s.n}"></h:inputText>
                                                                              </div>
                                                                          </div>
 
                                                                         <div class="col-12 col-sm-12">
                                                                             <div class="form-group">
                                                                                 <label>Description</label>
-                                                                                <h:inputText class="form-control"></h:inputText>
+                                                                                <h:inputText class="form-control" value="#{specializationBean.des}"></h:inputText>
                                                                             </div>
                                                                         </div>
                                                                     
 									<div class="col-12 col-sm-12">
 										<div class="form-group">
                                                                                     <label>Image</label>
-                                                                                    <h:inputFile class="form-control"/>
+                                                                                    <h:inputFile class="form-control" value="#{specializationBean.image}"/>
                                                                                 </div>
 									</div>
 									
@@ -129,7 +136,53 @@
 					</div>
 				</div>
 			</div>
-			<!-- /Edit Details Modal -->
+                                                                  
+                                                                        
+         <!-- Edit Details Modal -->
+         <div class="modal fade" id="edit_specialities_details1" aria-hidden="true" role="dialog" >
+				<div class="modal-dialog modal-dialog-centered" role="document" >
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Edit Specialities</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+                                                    <h:form enctype="multipart/form-data">
+                                                        <h:inputHidden value="#{s.specializationId}"></h:inputHidden>
+								<div class="row form-row">
+									<div class="col-12 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                     <label>Name</label>
+                                                                                     <h:inputText class="form-control" value="#{s.n}"></h:inputText>
+                                                                             </div>
+                                                                         </div>
+
+                                                                        <div class="col-12 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Description</label>
+                                                                                <h:inputText class="form-control" value="#{specializationBean.des}"></h:inputText>
+                                                                            </div>
+                                                                        </div>
+                                                                    
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+                                                                                    <label>Image</label>
+                                                                                    <h:inputFile class="form-control" value="#{specializationBean.image}"/>
+                                                                                </div>
+									</div>
+									
+								</div>
+                                                            <h:commandButton class="btn btn-primary btn-block" value="Edit"/>
+								
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
+	<!-- /Edit Details Modal -->
+			
 			
 			<!-- Delete Modal -->
 			<div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
@@ -145,8 +198,8 @@
 							<div class="form-content p-2">
 								<h4 class="modal-title">Delete</h4>
 								<p class="mb-4">Are you sure want to delete?</p>
-								<button type="button" class="btn btn-primary">Delete </button>
-								<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                                <h:commandButton class="btn btn-primary" value="Delete" action="#{specializationBean.Delete()}"></h:commandButton>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
