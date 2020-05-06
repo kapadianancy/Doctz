@@ -19,7 +19,7 @@ import javax.ws.rs.client.WebTarget;
  *        client.close();
  * </pre>
  *
- * @author ADMIN
+ * @author Admin
  */
 public class myclient {
 
@@ -113,7 +113,7 @@ public class myclient {
     }
 
     public <T> T editPatientProfile(Class<T> responseType, String patientId, String patientName, String gender, String address, String age, String username, String email, String contact, String userId) throws ClientErrorException {
-        return webTarget.path(java.text.MessageFormat.format("editPatientProfile/{0}/{1}/{2}/{3}/{4}/{5}{6}/{7}/{8}", new Object[]{patientId, patientName, gender, address, age, username, email, contact, userId})).request().post(null, responseType);
+        return webTarget.path(java.text.MessageFormat.format("editPatientProfile/{0}/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}", new Object[]{patientId, patientName, gender, address, age, username, email, contact, userId})).request().post(null, responseType);
     }
 
     public <T> T getAllHospital(Class<T> responseType) throws ClientErrorException {

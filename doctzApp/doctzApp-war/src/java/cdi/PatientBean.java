@@ -40,8 +40,12 @@ public class PatientBean {
   
      private String errorMsg="";
     
-    private PatientTb currentUser;
+    private PatientTb currentUser=new PatientTb();  
+    private PatientTb p=new PatientTb();  
+    
     GenericType<PatientTb> gp;
+    String emailStr="";
+        
   
     
     
@@ -50,9 +54,20 @@ public class PatientBean {
          c=new myclient();
          allpatient=new ArrayList<PatientTb>();
          gpatient=new GenericType<Collection<PatientTb>>(){};
-         currentUser=new PatientTb();
+         
          gp=new GenericType<PatientTb>(){};
+         
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+
+           HttpSession session= request.getSession(true);
+           emailStr=session.getAttribute("username").toString();
+
+            System.err.println(emailStr);
+         
     }
+
+   
+    
 
     public Collection<PatientTb> getAllpatient() {
           allpatient=ejb.getAllPatient();
@@ -150,38 +165,6 @@ public class PatientBean {
     public void setContact(long contact) {
         this.contact = contact;
     }
-    
-    
-      public PatientTb getCurrentUser() {
-        
-//        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-//               
-//        HttpSession session= request.getSession(true);
-//        String str=session.getAttribute("username").toString();
-//        System.out.println(str);
-//        PatientTb p1=new PatientTb();
-//        
-//        p1=ejb.getPatientByEmail(str);
-//        System.out.println(p1);
-//        this.patientid=p1.getPatientId();
-//        this.patientname=p1.getPatientName();
-//        this.age=p1.getAge();
-//        this.gender=p1.getGender();
-//        this.address=p1.getAddress();
-//        this.userid=p1.getUserId().getUserId();
-//        this.username=p1.getUserId().getUserName();
-//        this.email=p1.getUserId().getEmail();
-//        this.contact=p1.getUserId().getContact(); 
-//        
-//        return p1;
-       
-        return currentUser;
-    }
-
-    public void setCurrentUser(PatientTb currentUser) {
-       
-        this.currentUser = currentUser;
-    }
 
     public String getErrorMsg() {
         return errorMsg;
@@ -191,19 +174,19 @@ public class PatientBean {
         this.errorMsg = errorMsg;
     }
     
-    
-    
+     public PatientTb getCurrentUser() 
+    {
+        currentUser=ejb.getPatientByEmail(emailStr);
+        return currentUser;
+    }
 
+    public void setCurrentUser(PatientTb currentUser) {
+        this.currentUser = currentUser;
+    }
     
     public String addPatient()
     {
-        //Pbkdf2PasswordHashImpl pb=new Pbkdf2PasswordHashImpl();
-      
-        //String pass=pb.generate(this.password.toCharArray());
-        
-       // System.out.println(pb.generate(this.password.toCharArray())+" done");
-        
-       //System.out.println(pb.generate(this.password.toCharArray())+" done");
+    
         res=c.patientRegistration(Response.class, this.patientname, this.gender, this.address, String.valueOf(this.age), this.username,this.password , this.email, String.valueOf(this.contact));
         if(res.getStatus() > 0)
         {
@@ -214,38 +197,48 @@ public class PatientBean {
     }
     
     
-        public String editProfile()
+    public String display()
     {
-        //PatientTb p=this.getCurrentUser();
-        System.out.println(this.getPatientname());
-  //    res=c.editPatientProfile(Response.class, String.valueOf(this.currentUser.getPatientId()), this.patientname, this.gender, this.address, String.valueOf(this.age), this.username,this.email,String.valueOf(this.contact), String.valueOf(this.userid));
-//        System.out.println("res:"+res);
-//        if(res.getStatus() > 0)
-//        {
-//            this.errorMsg="";
-//            
-//            return "userProfile.xhtml";
-//        }
-//        else
-//        {
-//            this.errorMsg="Could not edit your Profile please try again";
-//            return "userProfile.xhtml";
-//        
-//            
-//        }
-//        
+        this.p=this.getCurrentUser();
+        this.patientname=this.p.getPatientName();
+        this.username=this.p.getUserId().getUserName();
+        this.contact=this.p.getUserId().getContact();
+        this.email=this.p.getUserId().getEmail();
+        this.gender=this.p.getGender();
+        this.age=this.p.getAge();
+        this.address=this.p.getAddress();
+        this.patientid=this.p.getPatientId();
+        this.userid=this.p.getUserId().getUserId();
         return "userProfile.xhtml";
     }
     
-    public void display()
+        public String editProfile()
     {
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-          
-        HttpSession session= request.getSession(true);
-        String str=session.getAttribute("username").toString();
+        //PatientTb p=this.getCurrentUser();
+//        System.err.println("id:"+this.getPatientid());
+//        System.err.println("name:"+this.getPatientname());
+//        System.err.println("username:"+this.getUsername());
+//        System.err.println("email:"+this.getEmail());
+//        System.err.println("id:"+this.getUserid());
         
-        this.setCurrentUser(ejb.getPatientByEmail(str));
-        this.setPatientname(currentUser.getPatientName());
+        System.out.println(this.currentUser.getPatientName());
+        res=c.editPatientProfile(Response.class, String.valueOf(this.getPatientid()), this.getPatientname(), this.getGender(), this.getAddress(), String.valueOf(this.getAge()), this.getUsername(),this.getEmail(),String.valueOf(this.getContact()), String.valueOf(this.getUserid()));
+        System.out.println("res:"+res);
+        if(res.getStatus() > 0)
+        {
+            this.errorMsg="";
+            
+            return "userProfile.xhtml";
+        }
+        else
+        {
+            this.errorMsg="Could not edit your Profile please try again";
+            return "userProfile.xhtml";
+        
+            
+        }
+      
     }
     
+   
 }

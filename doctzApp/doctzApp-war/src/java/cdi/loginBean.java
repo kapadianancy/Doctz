@@ -121,7 +121,7 @@ public class loginBean {
         {
 //            PatientBean p=new PatientBean();
 //            p.display();
-           return "userProfile.xhtml";
+           return "dashboard.xhtml";
         }
         return "faces/login.xhtml";
     }
