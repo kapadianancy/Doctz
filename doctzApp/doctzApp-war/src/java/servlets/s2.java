@@ -92,6 +92,10 @@ public class s2 extends HttpServlet {
             p=ejb.getPatientByEmail(str);
             System.err.println(p.getPatientName());
             
+
+            PatientTb p=ejb.getPatientByEmail("kapadianancy21@gmail.com");
+            out.println(p.getPatientName()+p.getUserId().getEmail());
+            
             out.println("</body>");
             out.println("</html>");
         }

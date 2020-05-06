@@ -45,6 +45,11 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    <mime-mapping>
+        <extension>png</extension>
+        <mime-type>image/png</mime-type>
+    </mime-mapping>
+    
     <security-constraint>
         <display-name>Constraint1</display-name>
         <web-resource-collection>

@@ -37,8 +37,7 @@ public class PatientBean {
     private String patientname,gender,address,username,password,email;
     private long contact;
     private int isActive;
-  
-     private String errorMsg="";
+    private String errorMsg="";
     
     private PatientTb currentUser=new PatientTb();  
     private PatientTb p=new PatientTb();  
@@ -57,6 +56,7 @@ public class PatientBean {
          
          gp=new GenericType<PatientTb>(){};
          
+<<<<<<< HEAD
             HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 
            HttpSession session= request.getSession(true);
@@ -64,6 +64,9 @@ public class PatientBean {
 
             System.err.println(emailStr);
          
+=======
+     
+>>>>>>> d9d866fc4d4652b1f7b3f80b0a2317f5b5fdf6c3
     }
 
    
@@ -235,9 +238,14 @@ public class PatientBean {
             this.errorMsg="Could not edit your Profile please try again";
             return "userProfile.xhtml";
         
+<<<<<<< HEAD
             
         }
       
+=======
+//        this.setCurrentUser(ejb.getPatientByEmail(str));
+//        this.setPatientname(currentUser.getPatientName());
+>>>>>>> d9d866fc4d4652b1f7b3f80b0a2317f5b5fdf6c3
     }
     
    

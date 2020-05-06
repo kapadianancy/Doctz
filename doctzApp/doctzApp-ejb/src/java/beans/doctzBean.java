@@ -312,7 +312,7 @@ public class doctzBean implements doctzBeanLocal {
         new_spe.setName(name);
        // new_spe.setParentSpecializationId(s);
         new_spe.setDescription(description);
-        new_spe.setImage(image);
+        new_spe.setImage("resources/img/specialities/"+image);
         new_spe.setIsActive(1);
 //        if(! specilizations.contains(new_spe))
 //        {
@@ -1171,6 +1171,7 @@ public class doctzBean implements doctzBeanLocal {
         {
             p=x;
         }
+     
         return p;
     }
 
