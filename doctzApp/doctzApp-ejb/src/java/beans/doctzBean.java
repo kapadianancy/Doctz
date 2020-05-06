@@ -14,7 +14,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.glassfish.soteria.identitystores.hash.Pbkdf2PasswordHashImpl;
+//import org.glassfish.soteria.identitystores.hash.Pbkdf2PasswordHashImpl;
 
 /**
  *
@@ -25,7 +25,7 @@ public class doctzBean implements doctzBeanLocal {
 
     @PersistenceContext(unitName = "doctzpu")
     EntityManager em;
-    Pbkdf2PasswordHashImpl pb=new Pbkdf2PasswordHashImpl();
+    //Pbkdf2PasswordHashImpl pb=new Pbkdf2PasswordHashImpl();
     //String pass=pb.generate(this.password.toCharArray());
     
     @Override
@@ -425,8 +425,8 @@ public class doctzBean implements doctzBeanLocal {
     @Override
     public int patientRegistration(String patientName, String gender, String address, int age, String username, String password, String email, long contact) {
         int status=0;
-        String pass=pb.generate(password.toCharArray());
-        
+        //String pass=pb.generate(password.toCharArray());
+        String pass=password;
         int userid=this.addUser(username, pass, email, contact);
         
         if(userid>0)

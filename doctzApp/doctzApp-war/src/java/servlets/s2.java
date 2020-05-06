@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 import org.glassfish.soteria.identitystores.hash.Pbkdf2PasswordHashImpl;
@@ -84,10 +85,16 @@ public class s2 extends HttpServlet {
 //            {
 //                out.println("\n"+s1.getHospitalName()+"<br>");
 //            }
-            
 
-            PatientTb p=ejb.getPatientByEmail("kapadianancy21@gmail.com");
-            out.println(p.getPatientName()+p.getUserId().getEmail());
+            PatientTb p=new PatientTb();
+            HttpSession session= request.getSession(true);
+            String str=session.getAttribute("username").toString();
+            p=ejb.getPatientByEmail(str);
+            System.err.println(p.getPatientName());
+            
+//
+//            PatientTb p=ejb.getPatientByEmail("kapadianancy21@gmail.com");
+//            out.println(p.getPatientName()+p.getUserId().getEmail());
             
             out.println("</body>");
             out.println("</html>");
