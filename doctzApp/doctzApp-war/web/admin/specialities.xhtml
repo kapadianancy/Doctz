@@ -11,7 +11,7 @@
         <ui:composition template="./masterPage.xhtml">
 
             <ui:define name="content">
-                <h:form>
+               <h:form>
             <div class="page-wrapper">
                 <div class="content container-fluid">
 				
@@ -45,6 +45,7 @@
                                                                         </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                    
                                                                     <ui:repeat value="#{specializationBean.allspec}" var="s">
                                                                         <tr>
                                                                             <td>
@@ -60,16 +61,15 @@
 
                                                                             <td class="text-right">
                                                                                     <div class="actions">
-<!--                                                                                        <a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details1">
-                                                                                              <i class="fe fe-pencil"></i> Edit
-                                                                                        </a>-->
+                                                                                      
 
-                                                            <h:commandButton class="btn btn-sm bg-success-light" value="Edit" action="#{specializationBean.edit(s.specializationId)}">    
+<h:commandButton class="btn btn-sm bg-success-light" value="Edit" action="#{specializationBean.edit(s.specializationId)}">    
                                                             </h:commandButton>
 
                                                                                          <a data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light">
                                                                                               <i class="fe fe-trash">Delete</i>
-                                                                                         </a>   
+                                                                                         </a>  
+                                                                                  
                                                                                     </div>
                                                                             </td>
                                                                         </tr>
@@ -81,6 +81,7 @@
                                                                             color: #15558d;
                                                                             padding: 224px;">No Data Found.</div>
                                                         </h:panelGroup>
+                                                                         
                                                                 </tbody>
                                                         </table>
 									</div>
@@ -88,100 +89,14 @@
 							</div>
 						</div>			
 					</div>
-				</div>			
+				
+                
+                            </div>			
 			</div>
-                </h:form>
+                
 			<!-- /Page Wrapper -->
 			
-			<!-- Edit Details Modal -->
-			<div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog" >
-				<div class="modal-dialog modal-dialog-centered" role="document" >
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">Edit Specialities</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-                                                    <h:form enctype="multipart/form-data">
-                                                        <h:inputHidden value="#{s.specializationId}"></h:inputHidden>
-								<div class="row form-row">
-									<div class="col-12 col-sm-12">
-                                                                            <div class="form-group">
-                                                                                     <label>Name</label>
-                                                                                     <h:inputText class="form-control" value="#{s.n}"></h:inputText>
-                                                                             </div>
-                                                                         </div>
-
-                                                                        <div class="col-12 col-sm-12">
-                                                                            <div class="form-group">
-                                                                                <label>Description</label>
-                                                                                <h:inputText class="form-control" value="#{specializationBean.des}"></h:inputText>
-                                                                            </div>
-                                                                        </div>
-                                                                    
-									<div class="col-12 col-sm-12">
-										<div class="form-group">
-                                                                                    <label>Image</label>
-                                                                                    <h:inputFile class="form-control" value="#{specializationBean.image}"/>
-                                                                                </div>
-									</div>
-									
-								</div>
-                                                            <h:commandButton class="btn btn-primary btn-block" value="Edit"/>
-								
-							</h:form>
-						</div>
-					</div>
-				</div>
-			</div>
-                                                                  
-                                                                        
-         <!-- Edit Details Modal -->
-         <div class="modal fade" id="edit_specialities_details1" aria-hidden="true" role="dialog" >
-				<div class="modal-dialog modal-dialog-centered" role="document" >
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">Edit Specialities</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-                                                    <h:form enctype="multipart/form-data">
-                                                        <h:inputHidden value="#{s.specializationId}"></h:inputHidden>
-								<div class="row form-row">
-									<div class="col-12 col-sm-12">
-                                                                            <div class="form-group">
-                                                                                     <label>Name</label>
-                                                                                     <h:inputText class="form-control" value="#{s.n}"></h:inputText>
-                                                                             </div>
-                                                                         </div>
-
-                                                                        <div class="col-12 col-sm-12">
-                                                                            <div class="form-group">
-                                                                                <label>Description</label>
-                                                                                <h:inputText class="form-control" value="#{specializationBean.des}"></h:inputText>
-                                                                            </div>
-                                                                        </div>
-                                                                    
-									<div class="col-12 col-sm-12">
-										<div class="form-group">
-                                                                                    <label>Image</label>
-                                                                                    <h:inputFile class="form-control" value="#{specializationBean.image}"/>
-                                                                                </div>
-									</div>
-									
-								</div>
-                                                            <h:commandButton class="btn btn-primary btn-block" value="Edit"/>
-								
-							</h:form>
-						</div>
-					</div>
-				</div>
-			</div>
-	<!-- /Edit Details Modal -->
+			
 			
 			
 			<!-- Delete Modal -->
@@ -206,7 +121,7 @@
 				</div>
 			</div>
 			<!-- /Delete Modal -->
-        
+               </h:form>
             </ui:define>
 
         </ui:composition>

@@ -7,8 +7,9 @@
     <body>
 
         <ui:composition template="./masterPage.xhtml">
-
-            <div class="page-wrapper">
+  <ui:define name="content">
+     
+               <div class="page-wrapper">
                 <div class="content container-fluid">
 				
 					<!-- Page Header -->
@@ -27,36 +28,43 @@
                     </div>
                 </div>
                                         
-            <div class="row">
+            
+                     <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
                              <h:form enctype="multipart/form-data">
-                                <div class="row form-row">
-                                    <h:inputHidden value="#{specializationBean.id}"/>
-                                        <div class="col-12 col-sm-12">
-                                            <div class="form-group">
-                                                     <label>Name</label>
-                                                     <h:inputText class="form-control" value="#{specializationBean.name}"></h:inputText>
-                                             </div>
-                                         </div>
+                                 <h:inputHidden value="#{specializationBean.id}"/>
+                                 <h:inputHidden value="#{specializationBean.image}"/>
+								<div class="row form-row">
+									<div class="col-12 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                     <label>Name</label>
+                                                                                     <h:inputText class="form-control" value="#{specializationBean.name}"></h:inputText>
+                                                                             </div>
+                                                                         </div>
 
-                                        <div class="col-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Description</label>
-                                                <h:inputText class="form-control" value="#{specializationBean.des}"></h:inputText>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label>Image</label>
-                                                    <h:inputFile class="form-control" value="#{specializationBean.uploadedFile}"/>
-                                                </div>
-                                        </div>
-
-                                </div>
-                                 <h:commandButton class="btn btn-primary btn-block" action="#{specializationBean.addSpecilaization()}" value="Edit"/>
+                                                                        <div class="col-12 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Description</label>
+                                                                                <h:inputText class="form-control" value="#{specializationBean.des}"></h:inputText>
+                                                                            </div>
+                                                                        </div>
+                                                                    
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+                                                                                    <label>Image</label>
+                                                                                 
+                                                                                    <br/>
+                                                                                    <img class="avatar-img" src="/doctzApp-war/#{s.image}" alt="Speciality" height="64" width="64"/>
+                                                                                   <br/>
+                                                                                     <br/>
+                                                                                     <h:inputFile class="form-control" value="#{specializationBean.uploadedFile}"/>
+                                                                                </div>
+									</div>
+									
+								</div>
+                                 <h:commandButton class="btn btn-primary btn-block" action="#{specializationBean.update()}" value="Edit"/>
 								
 							</h:form>
 
@@ -64,8 +72,11 @@
                     </div>
                 </div>
             </div>
-                                        
-                </div></div>
+                                                           
+                </div>
+               </div>
+      
+            </ui:define>
 
         </ui:composition>
 
