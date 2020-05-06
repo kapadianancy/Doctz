@@ -41,9 +41,9 @@
                                                                 <img src="/doctzApp-war/resources/img/patients/user.png" alt="User Image"/>
                                                         </a>
                                                         <div class="profile-det-info">
-                                                            <h3>#{patientBean.currentUser.patientName}</h3>
+                                                            <h3>#{patientBean.patientname}</h3>
                                                                 <div class="patient-details">
-                                                                    <h5><i class="fas fa-birthday-cake"></i>#{patientBean.currentUser.age}</h5>
+                                                                    <h5><i class="fas fa-birthday-cake"></i>#{patientBean.age}</h5>
                                                                     
                                                                 </div>
                                                         </div>
@@ -101,6 +101,7 @@
             <div class="card-body">
                 
     <!-- Profile Settings Form -->
+    
             <h:form>
                 <h:inputHidden id="id" value="#{patientBean.patientid}"/>
                     <div class="row form-row">

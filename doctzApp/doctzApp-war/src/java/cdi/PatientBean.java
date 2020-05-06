@@ -37,8 +37,7 @@ public class PatientBean {
     private String patientname,gender,address,username,password,email;
     private long contact;
     private int isActive;
-  
-     private String errorMsg="";
+    private String errorMsg="";
     
     private PatientTb currentUser;
     GenericType<PatientTb> gp;
@@ -52,6 +51,8 @@ public class PatientBean {
          gpatient=new GenericType<Collection<PatientTb>>(){};
          currentUser=new PatientTb();
          gp=new GenericType<PatientTb>(){};
+         
+     
     }
 
     public Collection<PatientTb> getAllpatient() {
@@ -244,8 +245,8 @@ public class PatientBean {
         HttpSession session= request.getSession(true);
         String str=session.getAttribute("username").toString();
         
-        this.setCurrentUser(ejb.getPatientByEmail(str));
-        this.setPatientname(currentUser.getPatientName());
+//        this.setCurrentUser(ejb.getPatientByEmail(str));
+//        this.setPatientname(currentUser.getPatientName());
     }
     
 }

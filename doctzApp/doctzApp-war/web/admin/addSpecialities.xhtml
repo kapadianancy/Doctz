@@ -37,26 +37,26 @@
 									<div class="col-12 col-sm-12">
                                                                             <div class="form-group">
                                                                                      <label>Name</label>
-                                                                                     <h:inputText class="form-control"></h:inputText>
+                                                                                     <h:inputText class="form-control" value="#{specializationBean.name}"></h:inputText>
                                                                              </div>
                                                                          </div>
 
                                                                         <div class="col-12 col-sm-12">
                                                                             <div class="form-group">
                                                                                 <label>Description</label>
-                                                                                <h:inputText class="form-control"></h:inputText>
+                                                                                <h:inputText class="form-control" value="#{specializationBean.des}"></h:inputText>
                                                                             </div>
                                                                         </div>
                                                                     
 									<div class="col-12 col-sm-12">
 										<div class="form-group">
                                                                                     <label>Image</label>
-                                                                                    <h:inputFile class="form-control"/>
+                                                                                    <h:inputFile class="form-control" value="#{specializationBean.uploadedFile}"/>
                                                                                 </div>
 									</div>
 									
 								</div>
-                                                            <h:commandButton class="btn btn-primary btn-block" value="Add"/>
+                                 <h:commandButton class="btn btn-primary btn-block" action="#{specializationBean.addSpecilaization()}" value="Add"/>
 								
 							</h:form>
 

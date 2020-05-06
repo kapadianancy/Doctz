@@ -9,7 +9,7 @@
        
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0"/>
-        <title>Doccure -Admin Dashboard</title>
+        <title>Doctz</title>
 		
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="/doctzApp-war/resources/img/favicon.png"></link>
@@ -26,11 +26,13 @@
         <link rel="stylesheet" href="/doctzApp-war/resources/admin/plugins/morris/morris.css"></link>
         <link rel="stylesheet" href="/doctzApp-war/resources/admin/css/style.css"></link>
 		
+        <link rel="stylesheet" href="/doctzApp-war/resources/admin/plugins/datatables/datatables.min.css"></link>
         
     </h:head>
 
     <h:body>
   
+        <div class="main-wrapper">
         <div id="top">
             <ui:include src="header.xhtml"></ui:include>
         </div>
@@ -42,18 +44,24 @@
                 <ui:insert name="content">Content</ui:insert>
             </div>
         </div>
+        </div>
     </h:body>
     
     <!-- jQuery -->
     
-      <script src="/doctzApp-war/resources/admin/js/jquery-3.2.1.min.js"></script>
-		
+     <script src="/doctzApp-war/resources/admin/js/jquery-3.2.1.min.js"></script>
+      
 		<!-- Bootstrap Core JS -->
         <script src="/doctzApp-war/resources/admin/js/popper.min.js"></script>
         <script src="/doctzApp-war/resources/admin/js/bootstrap.min.js"></script>
 		
 		<!-- Slimscroll JS -->
         <script src="/doctzApp-war/resources/admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+        
+        
+        <script src="/doctzApp-war/resources/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="/doctzApp-war/resources/admin/plugins/datatables/datatables.min.js"></script>
+        
 		
         <script src="/doctzApp-war/resources/admin/plugins/raphael/raphael.min.js"></script>    
         <script src="/doctzApp-war/resources/admin/plugins/morris/morris.min.js"></script>  
@@ -61,6 +69,9 @@
 
         <!-- Custom JS -->
         <script  src="/doctzApp-war/resources/admin/js/script.js"></script>
+        
+    
+
 		
       
 </html>
