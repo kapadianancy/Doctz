@@ -9,6 +9,7 @@ import beans.doctzBeanLocal;
 import client.myclient;
 import entity.DoctorTb;
 import entity.SpecializationTb;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -16,6 +17,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -48,7 +50,7 @@ public class doctorBean {
     String spec;
    
     private Collection<DoctorTb> alldocs;
-    private Collection<DoctorTb> searchDocs;
+    private Collection<DoctorTb> searchDocs,serachGenderDocs;
     private String ajaxvalue="";
 
     public String getAjaxvalue() {
@@ -75,19 +77,34 @@ public class doctorBean {
 
     public Collection<DoctorTb> getSearchDocs() 
     {
-        spec=params.get("spec");
-        searchDocs=ejb.getDoctorBySpecializationName(spec);
-        return searchDocs;
+        
+            spec=params.get("spec");
+            searchDocs=ejb.getDoctorBySpecializationName(spec);
+            return searchDocs;
     }
 
     public void setSearchDocs(Collection<DoctorTb> searchDocs) {
         this.searchDocs = searchDocs;
     }
 
-    public Collection<DoctorTb> getDoctorByGender(String str)
+    public Collection<DoctorTb> getSerachGenderDocs() {
+        return serachGenderDocs;
+    }
+
+    public void setSerachGenderDocs(Collection<DoctorTb> serachGenderDocs) {
+        this.serachGenderDocs = serachGenderDocs;
+    }
+
+    
+    
+    public void getDoctorByGender(String str)
     {
-        searchDocs=ejb.getDoctorByGender(str);
-        return searchDocs;
+        this.serachGenderDocs=ejb.getDoctorByGender(str);
+//        for(DoctorTb d:this.serachGenderDocs)
+//        {
+//            System.out.println(d.getDoctorName()+" "+d.getGender());
+//        }
+        //return searchDocs;
 
     }
     

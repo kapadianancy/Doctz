@@ -10,7 +10,7 @@
         <ui:composition template="./masterPage.xhtml">
 
             <ui:define name="content">
-                <h:form>
+                <h:form id="form">
                 
                  <div class="main-wrapper">
 <!-- Breadcrumb -->
@@ -70,25 +70,24 @@
                                                                             
                                                                             
 										<label class="custom_check">
-                                                                                    <h:selectBooleanCheckbox id="male">                                                                                        
-                                                                                         <f:ajax event="valueChange"
-                                                                                                render="result"
-                                                                                                execute="male"
-                                                                                                listener="#{doctorBean.ajax('nancy')}"/>
-                                                                                        </h:selectBooleanCheckbox>  
-                                                                                   
-											<span class="checkmark"></span> Male Doctor
+                                                                                    <h:selectBooleanCheckbox id="male" value="Male" >                                                                                        
+                                                                                        <f:ajax render="@form" execute="male" listener="#{doctorBean.getDoctorByGender('male')}"></f:ajax>
+                                                                                    </h:selectBooleanCheckbox>  
+                                                                                   <span class="checkmark"></span> Male Doctor
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
-											<input type="checkbox" name="gender_type"/>
-											<span class="checkmark"></span> Female Doctor
+                                                                                    <h:selectBooleanCheckbox id="female" value="Female">                                                                                        
+                                                                                        <f:ajax render="@form" listener="#{doctorBean.getDoctorByGender('female')}"></f:ajax>
+                                                                                    </h:selectBooleanCheckbox>  
+                                                                                   <span class="checkmark"></span> Female Doctor
 										</label>
 									</div>
 								</div>
 								<div class="filter-widget">
 									<h4>Select Specialist</h4>
+                                                                       
                                                                         <ui:repeat value="#{specializationBean.allspec}" var="s">
                                                                        
 									<div>
@@ -98,6 +97,7 @@
 										</label>
 									</div>
                                                                         </ui:repeat>
+                                                                       
 									
 								</div>
 									<div class="btn-search">
@@ -110,10 +110,10 @@
 						</div>
                                             
 						<div id="mydiv" class="col-md-12 col-lg-8 col-xl-9">
-                                                    <h:outputText id="result" value="#{doctorBean.ajaxvalue}"/>
 
 							<!-- Doctor Widget -->
-                                                        <ui:repeat value="#{doctorBean.searchDocs}" var="d">
+                                                        
+                                                        <ui:repeat id="docs" value="#{doctorBean.searchDocs}" var="d">
 							<div class="card">
 								<div class="card-body">
 									<div class="doctor-widget">
@@ -151,9 +151,50 @@
 								</div>
 							</div>
                                                         </ui:repeat>
+                                                        
+                                                        
+                                                        <ui:repeat  value="#{doctorBean.serachGenderDocs}" var="d">
+							<div class="card">
+								<div class="card-body">
+									<div class="doctor-widget">
+										<div class="doc-info-left">
+											<div class="doctor-img">
+												<a href="doctor-profile.html">
+                                                                                                    <img src="/doctzApp-war/#{d.profile}" class="img-fluid" alt="User Image"/>
+												</a>
+											</div>
+                                                                                    <div class="doc-info-cont">
+                                                                                        <h4 class="doc-name"><a href="doctor-profile.html">#{d.doctorName}</a></h4>
+                                                                                        <p class="doc-speciality">#{d.education}</p>
+                                                                                        
+                                                                                        
+                                                                                        <h5 class="doc-department"><img src="/doctzApp-war/#{d.specializationId.image}" class="img-fluid" alt="Speciality"/>#{d.specializationId.name}</h5>
+											
+											</div>
+											
+										</div>
+										<div class="doc-info-right">
+											<div class="clini-infos">
+												<ul>
+                                                                                                    
+                                                                                                    <li><i class="far fa-comment"></i> #{d.experience} experience</li>
+                                                                                                    <li><i class="fas fa-map-marker-alt"></i>#{d.gender}</li>
+													
+												</ul>
+											</div>
+											<div class="clinic-booking">
+												<a class="view-pro-btn" href="doctor-profile.html">View Profile</a>
+												<a class="apt-btn" href="booking.html">Book Appointment</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+                                                        </ui:repeat>
+                                                        
 							<!-- /Doctor Widget -->
                                                         
-                                                         <h:panelGroup rendered="#{empty doctorBean.searchDocs}">
+                                                        <h:panelGroup rendered="#{empty doctorBean.serachGenderDocs}">
                                                                 <div style="position: absolute;
                                                                             text-align: center;
                                                                             font-size: 60px;
@@ -170,6 +211,7 @@
 			</div>		
 			<!-- /Page Content -->
     </div>
+
                 </h:form>
             </ui:define>
             
