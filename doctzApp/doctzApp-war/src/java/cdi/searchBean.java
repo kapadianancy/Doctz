@@ -6,6 +6,7 @@
 package cdi;
 
 import client.myclient;
+import entity.DoctorTb;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
@@ -22,6 +23,7 @@ public class searchBean {
 
     private String area="";
     private String spec="";
+    
 
     public searchBean() {
     }
@@ -41,6 +43,7 @@ public class searchBean {
     public void setSpec(String spec) {
         this.spec = spec;
     }
+    
     
     public String search()
     {

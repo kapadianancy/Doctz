@@ -14,6 +14,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.Part;
@@ -28,6 +30,7 @@ import javax.ws.rs.core.Response;
  */
 @Named(value = "specializationBean")
 @RequestScoped
+@DeclareRoles({"admin","patient","hospital","doctor"})
 public class specializationBean {
 
     Response res;
@@ -37,6 +40,8 @@ public class specializationBean {
     GenericType<Collection<SpecializationTb>> gspec;
     GenericType<SpecializationTb> gs;
     
+    private String errorMsg="";
+    
     private int id,selectedId;
     private String name;
     private String des;
@@ -44,8 +49,8 @@ public class specializationBean {
     private int isActive;
     private Part uploadedFile;
     private SpecializationTb spec;
-    private String folder = "H:\\Doctz\\doctzApp\\doctzApp-war\\web\\resources\\img\\specialities";
-    
+    private String folder = "C:\\Users\\Admin\\Desktop\\doctz-git\\doctz\\doctzApp\\doctzApp-war\\web\\resources\\img\\specialities\\";
+   // private String folder = "H:\\Doctz\\doctzApp\\doctzApp-war\\web\\resources\\img\\specialities\\";
      public specializationBean() {
          c=new myclient();
          a=new myadmin();
@@ -61,6 +66,15 @@ public class specializationBean {
         return allspec;
     }
 
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
+    
     
     
     public void setAllspec(Collection<SpecializationTb> allspec) {
@@ -140,18 +154,28 @@ public class specializationBean {
         }
     }
     
+    @RolesAllowed("admin")
     public String addSpecilaization()
     {
         this.uploadImage();
        // System.out.println(this.name+" "+this.uploadedFile.getSubmittedFileName());
         res=a.addSpecialization(Response.class, this.name, this.des,this.uploadedFile.getSubmittedFileName());
-
-        return "specialities.xhtml?faces-redirect=true";
+        if(res.getStatus() > 0)
+        {
+            errorMsg="";
+            return "dashboard.xhtml?faces-redirect=true";
+        }
+        else
+        {
+            errorMsg="Something went wrong";
+            return "addSpecialities.xhtml";
+        }
+        
     }
             
-    public String Delete()
+    public String delete(int id)
     {
-        res=a.deleteSpecialization(Response.class, String.valueOf(this.selectedId));
+        res=a.deleteSpecialization(Response.class, String.valueOf(id));
         return "specialities.xhtml?faces-redirect=true";
     }
    
@@ -180,6 +204,6 @@ public class specializationBean {
             path=this.uploadedFile.getSubmittedFileName();
         }
         res=a.updateSpecialization(Response.class, String.valueOf(this.id), this.name, this.des, path);
-        return "specialities.xhtml?faces-redirect=true";
+        return "dashboard.xhtml?faces-redirect=true";
     }
 }

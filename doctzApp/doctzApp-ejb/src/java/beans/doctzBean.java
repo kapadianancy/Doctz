@@ -817,6 +817,11 @@ public class doctzBean implements doctzBeanLocal {
    
         
     }
+
+    @Override
+    public Collection<DoctorTb> getDoctorByGender(String gender) {
+        return em.createNamedQuery("DoctorTb.findByGender").setParameter("gender",gender).getResultList();
+    }
     
     
     

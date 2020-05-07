@@ -19,7 +19,7 @@ import javax.ws.rs.client.WebTarget;
  *        client.close();
  * </pre>
  *
- * @author ADMIN
+ * @author Admin
  */
 public class myadmin {
 
