@@ -8,6 +8,8 @@ package rest;
 import beans.doctzBeanLocal;
 import entity.*;
 import java.util.Collection;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;

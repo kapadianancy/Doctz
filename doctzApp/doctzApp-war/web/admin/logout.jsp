@@ -16,8 +16,6 @@
             session.invalidate();
             request.logout();
             response.sendRedirect("../index.xhtml");
-            
-            
-            %>
+  %>
     </body>
 </html>

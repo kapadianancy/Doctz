@@ -49,6 +49,17 @@ public class doctorBean {
    
     private Collection<DoctorTb> alldocs;
     private Collection<DoctorTb> searchDocs;
+    private String ajaxvalue="";
+
+    public String getAjaxvalue() {
+        return ajaxvalue;
+    }
+
+    public void setAjaxvalue(String ajaxvalue) {
+        this.ajaxvalue = ajaxvalue;
+    }
+    
+    
 
     public doctorBean() {
         c=new myclient();
@@ -56,6 +67,10 @@ public class doctorBean {
         alldocs=new ArrayList<DoctorTb>();
         searchDocs=new ArrayList<DoctorTb>();
        
+    }
+    public void ajax(String str)
+    {
+       ajaxvalue="hello "+str;
     }
 
     public Collection<DoctorTb> getSearchDocs() 
@@ -68,6 +83,14 @@ public class doctorBean {
     public void setSearchDocs(Collection<DoctorTb> searchDocs) {
         this.searchDocs = searchDocs;
     }
+
+    public Collection<DoctorTb> getDoctorByGender(String str)
+    {
+        searchDocs=ejb.getDoctorByGender(str);
+        return searchDocs;
+
+    }
+    
     
      public Collection<DoctorTb> getAlldocs() {
     

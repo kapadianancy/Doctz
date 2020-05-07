@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -36,26 +37,33 @@
 								<div class="row form-row">
 									<div class="col-12 col-sm-12">
                                                                             <div class="form-group">
-                                                                                     <label>Name</label>
-                                                                                     <h:inputText class="form-control" value="#{specializationBean.name}"></h:inputText>
+                                                                                <label>Name</label>&nbsp; <h:message for="name" style = "color:red"/>
+                                                                                     
+                                                                                     <h:inputText id="name" class="form-control" value="#{specializationBean.name}"
+                                                                                                  required="true" requiredMessage="Must not be empty"></h:inputText>
                                                                              </div>
                                                                          </div>
 
                                                                         <div class="col-12 col-sm-12">
                                                                             <div class="form-group">
-                                                                                <label>Description</label>
-                                                                                <h:inputText class="form-control" value="#{specializationBean.des}"></h:inputText>
+                                                                                <label>Description</label>&nbsp; <h:message for="des" style = "color:red"/>
+                                                                                <h:inputText id="des" class="form-control" value="#{specializationBean.des}"
+                                                                                             required="true" requiredMessage="Must not be empty"></h:inputText>
                                                                             </div>
                                                                         </div>
                                                                     
 									<div class="col-12 col-sm-12">
 										<div class="form-group">
-                                                                                    <label>Image</label>
-                                                                                    <h:inputFile class="form-control" value="#{specializationBean.uploadedFile}"/>
+                                                                                    <label>Image</label>&nbsp; <h:message for="image" style = "color:red"/>
+                                                                                    <h:inputFile id="image" class="form-control" value="#{specializationBean.uploadedFile}"
+                                                                                                 >
+                                                                                        <f:validator validatorId="validationBean"/>
+                                                                                    </h:inputFile>    
                                                                                 </div>
 									</div>
 									
 								</div>
+                                 <div style="color: red;">#{specializationBean.errorMsg}</div>
                                  <h:commandButton class="btn btn-primary btn-block" action="#{specializationBean.addSpecilaization()}" value="Add"/>
 								
 							</h:form>

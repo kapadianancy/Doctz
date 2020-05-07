@@ -4,6 +4,17 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+    <filter>
+        <filter-name>sessionManagement</filter-name>
+        <filter-class>filter.sessionManagement</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>sessionManagement</filter-name>
+        <url-pattern>/faces/admin/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
     <servlet>
         <servlet-name>test</servlet-name>
         <servlet-class>servlets.test</servlet-class>
@@ -39,7 +50,7 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            60
         </session-timeout>
     </session-config>
     <welcome-file-list>
@@ -49,7 +60,6 @@
         <extension>png</extension>
         <mime-type>image/png</mime-type>
     </mime-mapping>
-    
     <security-constraint>
         <display-name>Constraint1</display-name>
         <web-resource-collection>
@@ -58,7 +68,6 @@
             <url-pattern>/*</url-pattern>
         </web-resource-collection>
     </security-constraint>
-    
     <security-constraint>
         <display-name>Constraint2</display-name>
         <web-resource-collection>

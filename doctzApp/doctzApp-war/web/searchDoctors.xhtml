@@ -2,13 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./masterPage.xhtml">
 
             <ui:define name="content">
+                <h:form>
+                
                  <div class="main-wrapper">
 <!-- Breadcrumb -->
                 <div class="breadcrumb-bar">
@@ -64,8 +67,16 @@
 								<div class="filter-widget">
 									<h4>Gender</h4>
 									<div>
+                                                                            
+                                                                            
 										<label class="custom_check">
-											<input type="checkbox" name="gender_type"/>
+                                                                                    <h:selectBooleanCheckbox id="male">                                                                                        
+                                                                                         <f:ajax event="valueChange"
+                                                                                                render="result"
+                                                                                                execute="male"
+                                                                                                listener="#{doctorBean.ajax('nancy')}"/>
+                                                                                        </h:selectBooleanCheckbox>  
+                                                                                   
 											<span class="checkmark"></span> Male Doctor
 										</label>
 									</div>
@@ -97,8 +108,9 @@
 							<!-- /Search Filter -->
 							
 						</div>
-						
-						<div class="col-md-12 col-lg-8 col-xl-9">
+                                            
+						<div id="mydiv" class="col-md-12 col-lg-8 col-xl-9">
+                                                    <h:outputText id="result" value="#{doctorBean.ajaxvalue}"/>
 
 							<!-- Doctor Widget -->
                                                         <ui:repeat value="#{doctorBean.searchDocs}" var="d">
@@ -150,6 +162,7 @@
                                                         </h:panelGroup>
                                                         
                                                         </div>
+                                               
 					</div>
 
 				</div>
@@ -157,6 +170,7 @@
 			</div>		
 			<!-- /Page Content -->
     </div>
+                </h:form>
             </ui:define>
             
                  

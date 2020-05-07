@@ -65,10 +65,10 @@
 
 <h:commandButton class="btn btn-sm bg-success-light" value="Edit" action="#{specializationBean.edit(s.specializationId)}">    
                                                             </h:commandButton>
-
-                                                                                         <a data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light">
-                                                                                              <i class="fe fe-trash">Delete</i>
-                                                                                         </a>  
+                                                                                        
+                                                         
+  <h:commandButton class="btn btn-sm bg-danger-light" value="Delete" action="#{specializationBean.delete(s.specializationId)}" onclick="return confirm('Are you sure ? ');"></h:commandButton>
+                                                                                          
                                                                                   
                                                                                     </div>
                                                                             </td>
