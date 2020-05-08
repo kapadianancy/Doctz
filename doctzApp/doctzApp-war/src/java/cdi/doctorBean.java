@@ -35,6 +35,7 @@ public class doctorBean {
     Response res;
     
     Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+    
     GenericType<Collection<DoctorTb>> gdoc;
    
     private int id;
@@ -68,19 +69,25 @@ public class doctorBean {
         gdoc=new GenericType<Collection<DoctorTb>>(){};
         alldocs=new ArrayList<DoctorTb>();
         searchDocs=new ArrayList<DoctorTb>();
+        
+       
        
     }
     public void ajax(String str)
     {
        ajaxvalue="hello "+str;
     }
-
+     
+    
     public Collection<DoctorTb> getSearchDocs() 
     {
-        
-            spec=params.get("spec");
-            searchDocs=ejb.getDoctorBySpecializationName(spec);
-            return searchDocs;
+         
+       spec=params.get("spec");
+       if(spec != null){
+           System.out.println(spec);
+           searchDocs=ejb.getDoctorBySpecializationName(spec);
+       }
+        return searchDocs;
     }
 
     public void setSearchDocs(Collection<DoctorTb> searchDocs) {
@@ -88,6 +95,8 @@ public class doctorBean {
     }
 
     public Collection<DoctorTb> getSerachGenderDocs() {
+        
+        
         return serachGenderDocs;
     }
 
@@ -99,12 +108,16 @@ public class doctorBean {
     
     public void getDoctorByGender(String str)
     {
+        
         this.serachGenderDocs=ejb.getDoctorByGender(str);
-//        for(DoctorTb d:this.serachGenderDocs)
-//        {
-//            System.out.println(d.getDoctorName()+" "+d.getGender());
-//        }
-        //return searchDocs;
+        this.setSearchDocs(serachGenderDocs);
+       
+        for(DoctorTb d:this.searchDocs)
+        {
+            System.out.println(d.getDoctorName()+" "+d.getGender());
+        }
+       
+        
 
     }
     
