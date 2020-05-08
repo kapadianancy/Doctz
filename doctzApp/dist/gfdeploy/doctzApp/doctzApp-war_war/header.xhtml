@@ -31,15 +31,15 @@
 						
 							<li class="has-submenu">
                                                             
-                                                            <a href="specializations.html">Specializations <i class="fas fa-chevron-down"></i></a>
+                                                            <a href="faces/specialization.xhtml">Specializations <i class="fas fa-chevron-down"></i></a>
                                                             <ul class="submenu">
                                                                 <ui:repeat value="#{specializationBean.allspec}" var="s">
                                                                   
-                                                                    <li><a href="docHosBySpec.html"><h:outputText value="#{s.name}"/></a></li>
+                                                                    <li><a href="searchDoctors.xhtml?spec=#{s.name}"><h:outputText value="#{s.name}"/></a></li>
                                                             
                                                             
                                                              </ui:repeat> 
-                                                                <li><a href="specialization.html">View all</a></li>
+                                                                <li><a href="specialization.xhtml">View all</a></li>
                                                             </ul>
 							
 							</li>
