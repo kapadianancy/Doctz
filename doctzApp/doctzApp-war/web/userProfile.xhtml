@@ -9,6 +9,7 @@
         <ui:composition template="./masterPage.xhtml">
 
 <ui:define name="content">
+    <h:form>
 <!-- Breadcrumb -->
             <div class="breadcrumb-bar">
                     <div class="container-fluid">
@@ -33,6 +34,7 @@
                 <div class="row">
 
                  <!-- Profile Sidebar -->
+               
                         <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
                                 <div class="profile-sidebar">
                                         <div class="widget-profile pro-widget-content">
@@ -77,13 +79,16 @@
                                                                                 
                                                                         </a>
                                                                 </li>
+                                                            
                                                                 <li  class="active">
+                                                                     
                                                                     <h:commandLink  action="#{patientBean.display()}">
                                                                                 <i class="fas fa-user-cog"></i>
                                                                                 <span>Profile Settings</span>
                                                                     </h:commandLink>
-                                                                        
+                                                                   
                                                                 </li>
+                                                                 
                                                                 <li>
                                                                         <a href="changePassword.xhtml">
                                                                                 <i class="fas fa-lock"></i>
@@ -102,6 +107,7 @@
 
                                 </div>
                         </div>
+               
 	<!-- /Profile Sidebar -->
         <div class="col-md-7 col-lg-8 col-xl-9">
     <div class="card">
@@ -109,7 +115,7 @@
                 
     <!-- Profile Settings Form -->
     
-            <h:form>
+            
                 
                 <h:inputHidden id="id" value="#{patientBean.patientid}"/>
                     <div class="row form-row">
@@ -181,7 +187,7 @@
                             <span style="color: red;"><h:outputText value="#{patientBean.errorMsg}"/> </span>
                     </div>
                
-            </h:form>
+            
 	<!-- /Profile Settings Form -->
 
                                 </div>
@@ -190,7 +196,8 @@
         </div>
 </div>
 
-			</div>		
+			</div>	
+    </h:form>
 			<!-- /Page Content --> 
 </ui:define>
 
