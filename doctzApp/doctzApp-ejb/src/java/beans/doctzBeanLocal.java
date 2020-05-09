@@ -207,4 +207,6 @@ public interface doctzBeanLocal {
        public PatientTb getPatientByEmail(String email);
        
        public Collection<DoctorTb> getDoctorByGender(String gender);
+       
+       public void changePassword(String email,String password);
 }

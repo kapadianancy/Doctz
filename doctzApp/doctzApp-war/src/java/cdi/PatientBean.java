@@ -57,10 +57,18 @@ public class PatientBean {
          gp=new GenericType<PatientTb>(){};
          HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 
-           HttpSession session= request.getSession(true);
-           emailStr=session.getAttribute("username").toString();
+          HttpSession session = request.getSession(false);
+           if(null != session.getAttribute("username"))
+           {
+               System.out.println(session);
+                emailStr=session.getAttribute("username").toString();
+           }
+            else
+            {
+                System.out.println(session);
+            }
 
-            System.err.println(emailStr);
+           //System.err.println(emailStr);
 
     }
 
