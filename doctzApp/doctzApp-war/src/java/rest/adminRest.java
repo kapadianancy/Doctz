@@ -30,7 +30,8 @@ import javax.ws.rs.core.MediaType;
  * @author ADMIN
  */
 @Path("adminRest")
-@RequestScoped
+//@RequestScoped
+@DeclareRoles({"admin","patient","doctor","hospital"})
 public class adminRest {
 
     @EJB doctzBeanLocal ejb;
@@ -42,6 +43,7 @@ public class adminRest {
     }
 
     //public int addState(String stateName);
+    @RolesAllowed("admin")
     @POST
     @Path("/addState/{stateName}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,6 +53,7 @@ public class adminRest {
     }
     
     //public int updateState(int stateId,String stateName);
+    @RolesAllowed("admin")
     @POST
     @Path("/updateState/{stateId}/{stateName}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -60,6 +63,7 @@ public class adminRest {
     }
     
     //public int deleteState(int stateId);
+    @RolesAllowed("admin")
     @DELETE
     @Path("/deleteState/{stateId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -69,6 +73,7 @@ public class adminRest {
     }
 
     //  public Collection<StateTb> getAllState();
+    @RolesAllowed("admin")
     @GET
     @Path("/getAllState")
     @Produces(MediaType.APPLICATION_JSON)
@@ -77,6 +82,7 @@ public class adminRest {
     }
     
     // public int addCity(String cityName,int stateId);
+    @RolesAllowed("admin")
     @POST
     @Path("/addCity/{cityName}/{stateId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -86,6 +92,7 @@ public class adminRest {
     }
     
     //public int updateCity(int cityId,String cityName,int stateId);
+    @RolesAllowed("admin")
     @POST
     @Path("/updateCity/{cityId}/{cityName}/{stateId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -95,6 +102,7 @@ public class adminRest {
     }
     
     //public int deleteCity(int cityId);
+    @RolesAllowed("admin")
     @DELETE
     @Path("/deleteCity/{cityId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -103,7 +111,8 @@ public class adminRest {
         return ejb.deleteCity(cityId);
     }
     
-    //public Collection<CityTb> getAllCity();  
+    //public Collection<CityTb> getAllCity(); 
+    @RolesAllowed("admin")
     @GET
     @Path("/getAllCity")
     @Produces(MediaType.APPLICATION_JSON)
@@ -113,6 +122,7 @@ public class adminRest {
     }
     
     //public int addArea(String areaName,int cityId,int pincode,double latitude,double longitude);
+    @RolesAllowed("admin")
     @POST
     @Path("/addArea/{areaName}/{cityId}/{pincode}/{latitude}/{longitude}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -122,6 +132,7 @@ public class adminRest {
     }
     
     //public int updateArea(int areaId,String areaName,int cityId,int pincode,double latitude,double longitude);
+    @RolesAllowed("admin")
     @POST
     @Path("/updateArea/{areaId}/{areaName}/{cityId}/{pincode}/{latitude}/{longitude}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -131,6 +142,7 @@ public class adminRest {
     }
     
     //public int deleteArea(int areaId);
+    @RolesAllowed("admin")
     @DELETE
     @Path("/deleteArea/{areaId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -140,6 +152,7 @@ public class adminRest {
     }
     
     //public Collection<AreaTb> getAllArea();
+    @RolesAllowed("admin")
     @GET
     @Path("/getAllArea")
     @Produces(MediaType.APPLICATION_JSON)
@@ -149,6 +162,7 @@ public class adminRest {
     }
 
     //public Collection<HospitalTb> getAllHospital();
+    @RolesAllowed("admin")
     @GET
     @Path("/getAllHospital")
     @Produces(MediaType.APPLICATION_JSON)
@@ -158,6 +172,7 @@ public class adminRest {
     }
     
     //public int verifyHospital(int hospitalId);
+    @RolesAllowed("admin")
     @POST
     @Path("/verifyHospital/{hospitalId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -167,6 +182,7 @@ public class adminRest {
     }
     
     //public Collection<DoctorTb> getAllDoctor();
+    @RolesAllowed("admin")
     @GET
     @Path("/getAllDoctor")
     @Produces(MediaType.APPLICATION_JSON)
@@ -176,6 +192,7 @@ public class adminRest {
     }
     
     //public int verifyDoctor(int doctorId);
+    @RolesAllowed("admin")
     @POST
     @Path("/verifyDoctor/{doctorId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -185,6 +202,7 @@ public class adminRest {
     }
     
     //public int addSpecialization(String name,String description,String image);
+    @RolesAllowed("admin")
     @POST
     @Path("/addSpecialization/{name}/{description}/{image}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -194,6 +212,7 @@ public class adminRest {
     }
     
     //public int updateSpecialization(int specializaionId, String name,String description,String image);
+    @RolesAllowed("admin")
     @POST
     @Path("/updateSpecialization/{specializaionId}/{name}/{description}/{image}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -204,6 +223,7 @@ public class adminRest {
     }
     
     //public int deleteSpecialization(int specializaionId);
+    @RolesAllowed("admin")
     @DELETE
     @Path("/deleteSpecialization/{specializaionId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -213,6 +233,7 @@ public class adminRest {
     }
     
     //public Collection<SpecializationTb> getAllSpecialization();
+    @RolesAllowed("admin")
     @GET
     @Path("/getAllSpecialization")
     @Produces(MediaType.APPLICATION_JSON)
@@ -222,6 +243,7 @@ public class adminRest {
     }
     
     //public SpecializationTb getSpecializationById(int specializaionId);
+    @RolesAllowed("admin")
     @GET
     @Path("/getSpecializationById/{specializaionId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -231,6 +253,7 @@ public class adminRest {
     }
     
     //public Collection<AppointmentTb> getAllAppointment();
+    @RolesAllowed("admin")
     @GET
     @Path("/getAllAppointment")
     @Produces(MediaType.APPLICATION_JSON)

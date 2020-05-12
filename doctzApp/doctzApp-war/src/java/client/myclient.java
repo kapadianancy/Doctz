@@ -27,7 +27,14 @@ public class myclient {
     private Client client;
     private static final String BASE_URI = "http://localhost:8001/doctzApp-war/webresources";
 
-    public myclient() {
+    public myclient(String token) {
+        client = javax.ws.rs.client.ClientBuilder.newClient();
+        client.register(new RestFilter(token));
+        webTarget = client.target(BASE_URI).path("generic");
+    }
+    
+    public myclient()
+    {
         client = javax.ws.rs.client.ClientBuilder.newClient();
         webTarget = client.target(BASE_URI).path("generic");
     }

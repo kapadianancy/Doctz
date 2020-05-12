@@ -5,6 +5,7 @@
  */
 package cdi;
 
+import client.myadmin;
 import client.myclient;
 import entity.AreaTb;
 import java.util.ArrayList;
@@ -12,6 +13,10 @@ import java.util.Collection;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
@@ -38,7 +43,29 @@ public class areaBean {
     
     
     public areaBean() {
-        c=new myclient();
+        //c=new myclient();
+         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        String token="";
+
+          HttpSession session = request.getSession(false);
+        if(null != session.getAttribute("token"))
+        {
+          token = request.getSession().getAttribute("token").toString();
+          System.out.println("Token="+token);
+        
+//            String token1 = request.getHeader("Authorization").substring("Bearer ".length());
+//            System.out.println("Token="+token1);
+           // a = new myadmin(token);
+            c = new myclient(token);
+          
+        }
+        else
+        {
+          c=new myclient();
+         // a=new myadmin();
+        }
+         
         garea=new GenericType<Collection<AreaTb>>(){};
         allareas=new ArrayList<AreaTb>();
     }

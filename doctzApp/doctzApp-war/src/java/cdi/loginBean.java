@@ -11,6 +11,7 @@ import entity.*;
 import java.nio.charset.Charset;
 import java.util.Properties;
 import java.util.Random;
+import java.util.Set;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -27,6 +28,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.security.enterprise.AuthenticationStatus;
+import static javax.security.enterprise.AuthenticationStatus.SEND_CONTINUE;
 import static javax.security.enterprise.AuthenticationStatus.SEND_FAILURE;
 import static javax.security.enterprise.AuthenticationStatus.SUCCESS;
 import javax.security.enterprise.SecurityContext;
@@ -59,9 +61,12 @@ public class loginBean {
      Response res;
     private String username;
     private String password,message,color;
+    private AuthenticationStatus status;
+    private Set<String> roles;
    
     public loginBean() {
-        c=new myclient();
+        //c=new myclient();
+        
     }
 
     public String getUsername() {
@@ -88,8 +93,30 @@ public class loginBean {
         this.color = color;
     }
 
-    
-    
+     public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
+    }
+
+    public AuthenticationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AuthenticationStatus status) {
+        this.status = status;
+    }
+  
+    public SecurityContext getSc() {
+        return sc;
+    }
+
+    public void setSc(SecurityContext sc) {
+        this.sc = sc;
+    }
+
     public String getMessage() {
         return message;
     }
@@ -134,6 +161,69 @@ public class loginBean {
         
         
     }
+    
+     public String JWTlogin()
+    {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try{
+        
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+      
+        request.getSession().setAttribute("logged-group", ""); 
+        
+        Credential credential = new UsernamePasswordCredential(username, new Password(password));
+        AuthenticationStatus status= sc.authenticate(request, response, withParams().credential(credential));
+                                           
+     
+       if (status.equals(SEND_CONTINUE)) {
+            // Authentication mechanism has send a redirect, should not
+            // send anything to response from JSF now. The control will now go into HttpAuthenticationMechanism
+            context.responseComplete();
+       } 
+       
+ //      else if (status.equals(SEND_FAILURE)) {
+//            message = "Login Failed";
+//            System.out.println(message);
+//            addError(context, "Authentication failed");
+//        }
+         //  if(securityContext.isCallerInRole("Admin"))
+         System.out.println("In bean");
+         if(roles.contains("admin"))
+           {
+               System.out.println("In admin");
+               request.getSession().setAttribute("logged-group", "admin");
+               request.getSession().setAttribute("username", this.username);
+               request.getSession().setAttribute("password", this.password);
+              return "/faces/admin/dashboard.xhtml?faces-redirect=true";
+           }
+        //   else if(securityContext.isCallerInRole("Supervisor"))
+       else if(roles.contains("patient"))
+           {
+               System.out.println("In patient");
+               request.getSession().setAttribute("logged-group", "patient");
+               request.getSession().setAttribute("username", this.username);
+               request.getSession().setAttribute("password", this.password);
+               return "/faces/index.xhtml?faces-redirect=true";
+           }
+         else
+       {
+           return "/login.xhtml";
+       }
+        
+       //} 
+       
+       
+        }
+        catch (Exception e)
+        {
+             message = "Invalid User !!!";
+              e.printStackTrace();
+        }
+//        
+      return "";
+    }
+    
     
      public String getLogin()
     {
