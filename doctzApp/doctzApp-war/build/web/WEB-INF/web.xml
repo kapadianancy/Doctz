@@ -67,6 +67,10 @@
             <description/>
             <url-pattern>/*</url-pattern>
         </web-resource-collection>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
     <security-constraint>
         <display-name>Constraint2</display-name>
@@ -75,6 +79,10 @@
             <description/>
             <url-pattern>/admin/*</url-pattern>
         </web-resource-collection>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
     <security-role>
         <description/>

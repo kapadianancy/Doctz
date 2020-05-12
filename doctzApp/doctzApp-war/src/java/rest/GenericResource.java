@@ -10,6 +10,8 @@ import entity.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Collection;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -30,7 +32,8 @@ import javax.ws.rs.core.MediaType;
  * @author ADMIN
  */
 @Path("generic")
-@RequestScoped
+//@RequestScoped
+@DeclareRoles({"admin","patient","doctor","hospital"})
 public class GenericResource {
 
     @EJB doctzBeanLocal ejb;
@@ -44,6 +47,7 @@ public class GenericResource {
     }
     
 //  public Collection<StateTb> getAllState();
+   // @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getAllState")
     @Produces(MediaType.APPLICATION_JSON)
@@ -52,6 +56,7 @@ public class GenericResource {
     }
 
 //  public Collection<CityTb> getAllCity(); 
+   // @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getAllCity")
     @Produces(MediaType.APPLICATION_JSON)
@@ -61,6 +66,7 @@ public class GenericResource {
     }
     
 //  public Collection<AreaTb> getAllArea();
+   // @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getAllArea")
     @Produces(MediaType.APPLICATION_JSON)
@@ -70,6 +76,7 @@ public class GenericResource {
     }
     
 //  public int addUser(String userName,String password,String email,long contact);
+    @RolesAllowed({"admin","patient"})
     @POST
     @Path("/addUser/{userName}/{password}/{email}/{contact}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -79,6 +86,7 @@ public class GenericResource {
     }
     
 //  public int addUserGroup(int userId,int groupId);
+    @RolesAllowed({"admin","patient"})
     @POST
     @Path("/addUserGroup/{userId}/{groupId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -89,6 +97,7 @@ public class GenericResource {
    
    
 //  public int authenticateUser(String email,long contact);
+    @RolesAllowed({"admin","patient"})
     @POST
     @Path("/authenticateUser/{email}/{contact}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -99,6 +108,7 @@ public class GenericResource {
     
     
 //  public int patientRegistration(String patientName,String gender,String address,int age,String username,String password,String email,long contact);
+    //@RolesAllowed({"admin","patient"})
     @POST
     @Path("/patientRegistration/{patientName}/{gender}/{address}/{age}/{username}/{password}/{email}/{contact}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -108,6 +118,7 @@ public class GenericResource {
     }
     
 //  public Collection<SpecializationTb> getAllSpecialization();
+    //@RolesAllowed({"admin","patient"})
     @GET
     @Path("/getAllSpecialization")
     @Produces(MediaType.APPLICATION_JSON)
@@ -117,6 +128,7 @@ public class GenericResource {
     }
     
 //  public Collection<SpecializationTb> getSpecializationByParentId(int parentSpecializationId);
+    @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getSpecializationByParentId/{parentSpecializationId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -127,6 +139,7 @@ public class GenericResource {
     
     
 //  public Collection<FeesTb> getFeesByHospital(int hospitalId);
+  //  @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getFeesByHospital/{hospitalId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -136,6 +149,7 @@ public class GenericResource {
     }
     
 //  public Collection<FeesTb> getFeesBySpeciality(int specializaionId);  
+  //  @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getFeesBySpeciality/{specializaionId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -145,6 +159,7 @@ public class GenericResource {
     }
     
 //  public int addReview(int patientId,int doctorId,int hospitalId,String review);
+    @RolesAllowed({"admin","patient"})
     @POST
     @Path("/addReview/{patientId}/{doctorId}/{hospitalId}/{review}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -154,6 +169,7 @@ public class GenericResource {
     }
     
 //  public Collection<ReviewTb> getAllReview();
+   // @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getAllReview")
     @Produces(MediaType.APPLICATION_JSON)
@@ -162,6 +178,7 @@ public class GenericResource {
     }
     
 //  public int bookAppointment(int doctorId,int patientId,int hospitalId,Date date,Time time,String amPm);
+    @RolesAllowed("patient")
     @POST
     @Path("/bookAppointment/{doctorId}/{patientId}/{hospitalId}/{date}/{time}/{amPm}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -170,6 +187,7 @@ public class GenericResource {
     }
     
 //  public int cancelAppointment(int appointmentId);
+    @RolesAllowed({"admin","patient"})
     @DELETE
     @Path("/cancelAppointment/{appointmentId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -180,6 +198,7 @@ public class GenericResource {
     
     
 //  public Collection<AppointmentTb> getAllDoctorAppointment(int hospitalId,int doctorId);
+    @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getAllDoctorAppointment/{hospitalId}/{doctorId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -189,6 +208,7 @@ public class GenericResource {
     }
     
 //  public Collection<AppointmentTb> getAllPatientAppointment(int patientId);
+    @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getAllPatientAppointment/{patientId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -199,6 +219,7 @@ public class GenericResource {
     }
     
 //  public Collection<HospitalTb> getHospitalByArea(String areaName);
+    //@RolesAllowed({"admin","patient"})
     @GET
     @Path("/getHospitalByArea/{areaName}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -209,6 +230,7 @@ public class GenericResource {
     }
     
 //  public Collection<DoctorTb> getDoctorByArea(String areaName);
+   // @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getDoctorByArea/{areaName}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -219,6 +241,7 @@ public class GenericResource {
     }
     
 //  public Collection<HospitalTb> getHospitalBySpecialization(int specializaionId);
+   // @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getHospitalBySpecialization/{specializaionId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -228,6 +251,7 @@ public class GenericResource {
     }
     
 //  public Collection<DoctorTb> getDoctorOfHospital(int hospitalId);
+    //@RolesAllowed({"admin","patient"})
     @GET
     @Path("/getDoctorOfHospital/{hospitalId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -238,6 +262,7 @@ public class GenericResource {
     }
     
 //  public Collection<DoctorTb> getDoctorBySpecialization(int specializaionId);
+   // @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getDoctorBySpecialization/{specializaionId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -248,6 +273,7 @@ public class GenericResource {
     }
     
 //  public Collection<HospitalTb> getHospitalByName(String hospitalName);
+   // @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getHospitalByName/{hospitalName}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -257,6 +283,7 @@ public class GenericResource {
     }
    
 //  public Collection<DoctorTb> getDoctorByName(String doctorName);
+   // @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getDoctorByName/{doctorName}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -266,6 +293,7 @@ public class GenericResource {
     }
     
 //  public Collection<HospitalTb> getHospitalByFeesAndSpecialization(int specializaionId,int fromFees,int toFees);
+   // @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getHospitalByFeesAndSpecialization/{specializaionId}/{fromFees}/{toFees}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -275,6 +303,7 @@ public class GenericResource {
     }
     
 //  public Collection<HospitalTb> emergency(int specializaionId);
+  //  @RolesAllowed({"admin","patient"})
     @GET
     @Path("/emergency/{specializaionId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -284,6 +313,7 @@ public class GenericResource {
     }
     
 //  public Collection<HospitalTb> getHospitalByCity(String cityName);
+  //  @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getHospitalByCity/{cityName}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -293,6 +323,7 @@ public class GenericResource {
     }
     
 //  public Collection<HospitalTb> getHospitalByState(String stateName);
+  //  @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getHospitalByState/{stateName}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -302,6 +333,7 @@ public class GenericResource {
     }
     
 //  public Collection<DoctorTb> getDoctorByExperience();
+  //  @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getDoctorByExperience}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -311,6 +343,7 @@ public class GenericResource {
     }
     
 //  public Collection<HospitalTb> getHospitalByLowToHighFees(String spcializationName);
+  //  @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getHospitalByLowToHighFees/{spcializationName}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -320,6 +353,7 @@ public class GenericResource {
     }
     
 //  public Collection<HospitalTb> getHospitalByHighToLowFees(String spcializationName);
+  //  @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getHospitalByHighToLowFees/{spcializationName}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -329,6 +363,7 @@ public class GenericResource {
     }
     
 //  public Collection<HospitalTb> getHospitalByFees(String name,int fromFees,int toFees);
+  //  @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getHospitalByFees/{name}/{fromFees}/{toFees}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -338,6 +373,7 @@ public class GenericResource {
     }
     
 //  public Collection<DoctorTb> getDoctorByAvailability(Date date);
+  //  @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getDoctorByAvailability/{date}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -347,6 +383,7 @@ public class GenericResource {
     }
     
 //  public int editPatientProfile(int patientId,String patientName,String gender,String address,int age,String username,String email,long contact,int userId);
+    @RolesAllowed({"admin","patient"})
     @POST
     @Path("/editPatientProfile/{patientId}/{patientName}/{gender}/{address}/{age}/{username}/{email}/{contact}/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -356,6 +393,7 @@ public class GenericResource {
     }
 
 //  public Collection<DoctorAttachmentTb> viewAttachmentOfPatient(int patientId);
+    @RolesAllowed({"admin","patient"})
     @GET
     @Path("/viewAttachmentOfPatient/{patientId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -365,6 +403,7 @@ public class GenericResource {
     }
     
  //  public Collection<DoctorTb> getAllDoctor();  
+    //@RolesAllowed({"admin","patient"})
     @GET
     @Path("/getAllDoctor")
     @Produces(MediaType.APPLICATION_JSON)
@@ -374,6 +413,7 @@ public class GenericResource {
     }
     
  // public Collection<HospitalTb> getAllHospital();
+  //  @RolesAllowed({"admin","patient"})
     @GET
     @Path("/getAllHospital")
     @Produces(MediaType.APPLICATION_JSON)

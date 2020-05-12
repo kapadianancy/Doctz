@@ -18,10 +18,10 @@ import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
  */
 
 
-@CustomFormAuthenticationMechanismDefinition(
-loginToContinue = @LoginToContinue(
-        loginPage = "/faces/login.xhtml"
-))
+//@CustomFormAuthenticationMechanismDefinition(
+//loginToContinue = @LoginToContinue(
+//        loginPage = "/faces/login.xhtml"
+//))
 @DatabaseIdentityStoreDefinition(
         dataSourceLookup = "jdbc/doctz_pool",
         callerQuery = "select password from user_tb where email=?",

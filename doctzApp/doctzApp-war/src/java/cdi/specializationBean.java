@@ -18,6 +18,10 @@ import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import javax.ws.rs.core.GenericType;
@@ -52,8 +56,32 @@ public class specializationBean {
    // private String folder = "C:\\Users\\Admin\\Desktop\\doctz-git\\doctz\\doctzApp\\doctzApp-war\\web\\resources\\img\\specialities\\";
     private String folder = "H:\\Doctz\\doctzApp\\doctzApp-war\\web\\resources\\img\\specialities\\";
      public specializationBean() {
-         c=new myclient();
-         a=new myadmin();
+         
+         
+        // c=new myclient();
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        String token="";
+
+          HttpSession session = request.getSession(false);
+        if(null != session.getAttribute("token"))
+        {
+          token = request.getSession().getAttribute("token").toString();
+          System.out.println("Token="+token);
+        
+//            String token1 = request.getHeader("Authorization").substring("Bearer ".length());
+//            System.out.println("Token="+token1);
+            a = new myadmin(token);
+            c = new myclient(token);
+          
+        }
+        else
+        {
+          c=new myclient();
+          a=new myadmin();
+        }
+         
+        // a=new myadmin();
          allspec=new ArrayList<SpecializationTb>();
          gspec=new GenericType<Collection<SpecializationTb>>(){};
          gs=new GenericType<SpecializationTb>(){};

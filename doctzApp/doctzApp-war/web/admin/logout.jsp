@@ -13,6 +13,10 @@
     </head>
     <body>
         <%
+            Cookie c = new Cookie("JREMEMBERMEID","");
+            c.setMaxAge(0);
+            response.addCookie(c);
+            
             session.invalidate();
             request.logout();
             response.sendRedirect("../index.xhtml");

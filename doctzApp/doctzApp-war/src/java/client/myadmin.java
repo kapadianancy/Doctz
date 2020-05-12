@@ -27,9 +27,16 @@ public class myadmin {
     private Client client;
     private static final String BASE_URI = "http://localhost:8001/doctzApp-war/webresources";
 
-    public myadmin() {
+    public myadmin(String token) {
         client = javax.ws.rs.client.ClientBuilder.newClient();
+        client.register(new RestFilter(token));
         webTarget = client.target(BASE_URI).path("adminRest");
+    }
+    
+    public myadmin()
+    {
+      client = javax.ws.rs.client.ClientBuilder.newClient();
+      webTarget = client.target(BASE_URI).path("adminRest");
     }
 
     public <T> T updateState(Class<T> responseType, String stateId, String stateName) throws ClientErrorException {
