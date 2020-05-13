@@ -7,10 +7,6 @@ package client;
  */
 
 
-/**
- *
- * @author root
- */
 import java.io.IOException;
 import javax.inject.Inject;
 import javax.ws.rs.client.ClientRequestContext;

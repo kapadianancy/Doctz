@@ -60,7 +60,7 @@ public class loginBean {
      myclient c;
      Response res;
     private String username;
-    private String password,message,color;
+    private String password,message,color,npass,cpass;
     private AuthenticationStatus status;
     private Set<String> roles;
    
@@ -92,6 +92,26 @@ public class loginBean {
     public void setColor(String color) {
         this.color = color;
     }
+
+    public String getNpass() {
+        return npass;
+    }
+
+    public void setNpass(String npass) {
+        this.npass = npass;
+    }
+
+    public String getCpass() {
+        return cpass;
+    }
+
+    public void setCpass(String cpass) {
+        this.cpass = cpass;
+    }
+
+    
+    
+    
 
      public Set<String> getRoles() {
         return roles;
@@ -319,7 +339,7 @@ public class loginBean {
     public String forget_password()
     {
         PatientTb p=ejb.getPatientByEmail(this.username);
-        System.out.println(p);
+        //System.out.println(p);
         if(p.getPatientId() != null)
         {           
             sendMail();         
@@ -333,4 +353,32 @@ public class loginBean {
         }
         return "faces/forget_password.xhtml";
     }
+    
+    
+    public String changePassword()
+    {
+       PatientTb p=ejb.getPatientByEmail(this.username);
+        //System.out.println(p);
+        if(p.getPatientId() != null)
+        {   
+            if(! this.npass.equals(this.cpass))
+            {
+               this.message="New Password and Confirm password must be same. ";
+               this.color="red";
+            }
+            else
+            {
+                ejb.changePassword(this.username, this.npass);
+                this.message="Successfully Changed";
+                this.color="Green";
+            }
+        }
+        else
+        {
+            this.message="Enter Valid Email";  
+            this.color="red";
+        }
+        return "faces/changePassword.xhtml";
+    }
+
 }
