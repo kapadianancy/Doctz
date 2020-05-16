@@ -32,9 +32,12 @@ import org.glassfish.soteria.identitystores.hash.Pbkdf2PasswordHashImpl;
 public class s2 extends HttpServlet {
 
    @EJB doctzBeanLocal ejb;
-//    Pbkdf2PasswordHashImpl pb=new Pbkdf2PasswordHashImpl();
-//    String n="nidhi";
-//    String pass=pb.generate(n.toCharArray());
+    Pbkdf2PasswordHashImpl pb=new Pbkdf2PasswordHashImpl();
+    String n="nidhi";
+    String pass=pb.generate(n.toCharArray());
+//    
+//    String b="nidhi";
+//    String pass2=pb.generate(b.toCharArray());
 //    
    Response res;
    myclient c1=new myclient();
@@ -72,11 +75,11 @@ public class s2 extends HttpServlet {
 //                out.println(s1.getName()+" "+s1.getDescription()+" "+s1.getImage()+"<br>");
 //            }
 
-                GenericType<SpecializationTb> specs=new GenericType<SpecializationTb>(){};
-                res=a1.getSpecializationById(Response.class, "2");
-                SpecializationTb spe=res.readEntity(specs);
-                out.println(spe.getName()+" "+spe.getDescription()+" "+spe.getImage()+"<br>");
-                
+//                GenericType<SpecializationTb> specs=new GenericType<SpecializationTb>(){};
+//                res=a1.getSpecializationById(Response.class, "2");
+//                SpecializationTb spe=res.readEntity(specs);
+//                out.println(spe.getName()+" "+spe.getDescription()+" "+spe.getImage()+"<br>");
+//                
 //            
             
 //            Collection<HospitalTb> sp=ejb.getHospitalByAreaAndSpecializationName("Ring Road", "Dentist");
@@ -95,7 +98,9 @@ public class s2 extends HttpServlet {
 //
 //            PatientTb p=ejb.getPatientByEmail("kapadianancy21@gmail.com");
 //            out.println(p.getPatientName()+p.getUserId().getEmail());
-            
+//           out.println("Pass 1 : "+pass+"<br>");
+//            
+//            out.println("Pass 2 : "+pass2);
             out.println("</body>");
             out.println("</html>");
         }
