@@ -10,9 +10,6 @@
                     <file>${reference.doctzApp-ejb.dist}</file>
                 </library>
                 <library dirs="200">
-                    <file>${libs.Payara Server (1) Jersey.classpath}</file>
-                </library>
-                <library dirs="200">
                     <file>${file.reference.jjwt-0.9.0.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
