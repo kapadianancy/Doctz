@@ -355,7 +355,7 @@ public class loginBean {
     }
     
     
-    public String changePassword()
+   public String changePassword()
     {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession session= request.getSession(true);

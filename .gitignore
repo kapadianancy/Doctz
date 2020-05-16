@@ -11,10 +11,13 @@
 /doctzApp/doctzApp-war/nbproject/project.properties
 /doctzApp/doctzApp-ejb/nbproject/project.properties
 /doctzApp/nbproject/project.properties
+<<<<<<< HEAD
 /DoctzWeb/nbproject/private/
 /DoctzWeb/nbproject/private/
 /DoctzWeb/build/
 /DoctzWeb/dist/
+=======
+>>>>>>> b001ce55cf5901c40b729510be9ab90e312e6cf3
 
 
 
@@ -22,3 +25,7 @@
 /DoctzWeb/build/
 /DoctzWeb/dist/
 /DoctzWeb/nbproject/project.properties
+<<<<<<< HEAD
+=======
+
+>>>>>>> b001ce55cf5901c40b729510be9ab90e312e6cf3
