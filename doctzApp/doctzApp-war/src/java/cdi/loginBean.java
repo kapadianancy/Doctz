@@ -355,30 +355,8 @@ public class loginBean {
     }
     
     
-    public String changePassword()
+   public String changePassword()
     {
-<<<<<<< HEAD
-       PatientTb p=ejb.getPatientByEmail(this.username);
-        //System.out.println(p);
-        if(p.getPatientId() != null)
-        {   
-            if(! this.npass.equals(this.cpass))
-            {
-               this.message="New Password and Confirm password must be same. ";
-               this.color="red";
-            }
-            else
-            {
-                ejb.changePassword(this.username, this.npass);
-                this.message="Successfully Changed";
-                this.color="Green";
-            }
-        }
-        else
-        {
-            this.message="Enter Valid Email";  
-            this.color="red";
-=======
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession session= request.getSession(true);
         if(!session.getAttribute("username").equals(this.username))
@@ -409,7 +387,6 @@ public class loginBean {
                  this.message="Enter Valid Email";  
                  this.color="red";
              }
->>>>>>> 3230b5225d7bfe69c9df43b428e4154eb39360b6
         }
         return "faces/changePassword.xhtml";
     }
